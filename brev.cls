@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.15 2001/07/30 20:08:26 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.16 2001/07/30 20:14:20 ambolt Exp ambolt $
 %
 % Copyright © 1999-2000 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 % All rights reserved.
@@ -114,7 +114,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2001/07/30 20:08:26 $ v$Revision: 4.15 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2001/07/30 20:14:20 $ v$Revision: 4.16 $ Class for private letters]
 %
 %% Initial code part:
 %
@@ -128,7 +128,7 @@
 \newlength{\to@address}
 \newcommand*{\ourref}[1]{\def\O@ref{#1}}
 \newcommand*{\yourref}[1]{\def\Y@ref{#1}}
-\def\Letter@Date(#1/#2/#3){%
+\def\Letter@Date(#1-#2-#3){%
   \ifx\@empty#1\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
   \ifx\@empty#2\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
   \ifx\@empty#3\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
