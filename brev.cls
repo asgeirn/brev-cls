@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.18 2003/01/22 22:48:04 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.19 2003/01/22 22:53:17 ambolt Exp ambolt $
 %
 % Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 %
@@ -118,7 +118,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2003/01/22 22:48:04 $ v$Revision: 4.18 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2003/01/22 22:53:17 $ v$Revision: 4.19 $ Class for private letters]
 %
 %% Initial code part:
 %
@@ -159,7 +159,7 @@
 \DeclareOption{blockadjust}{\r@ggedfalse}
 \DeclareOption{window}{\setlength{\to@address}{-5.4mm}}
 \DeclareOption{nowindow}{\setlength{\to@address}{0mm}}
-\DeclareOption{nofoldinglines}{\setlength{\to@address}{\def\O@nofoldinglines{true}}}
+\DeclareOption{nofoldinglines}{\def\O@nofoldinglines{true}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
 %
 %% Options execution part:
