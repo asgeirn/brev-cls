@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.2 1996/04/16 21:08:42 ambolt Rel ambolt $
+% $Id: brev.cls,v 1.3 1996/04/20 15:24:28 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the name
@@ -30,13 +30,15 @@
 % any improvements!
 
 % Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
-% With thanks to Dag Langmyhr <dag@ifi.uio.no>
+% With thanks to 
+%   Dag Langmyhr <dag@ifi.uio.no>
+%   Svend Tollak Munkejord <stm@stud.unit.no>
 
 %% Identification part:
 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
 
-\ProvidesClass{brev}[1996/04/16 $Revision: 1.2 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/04/16 $Revision: 1.3 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -72,10 +74,15 @@
           \toaddress
           \end{minipage}}}
         \put(0,3.5){\makebox(0,0)[bl]{\begin{minipage}{7cm}
-          \fromname\\
+          \ifx\@empty\fromname % In case you don't use \name
+          \else
+             \fromname\\
+          \fi
           \fromaddress
           \end{minipage}}}
-      \end{picture}\hss\raisebox{1cm}{\fromlocation,\ \@date}}}%
+      \end{picture}\hss\raisebox{1cm}{%
+          \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date}}}%
+          % In case you don't use \location
   }%
   \def \@oddhead{\@evenhead}%
   \def \@oddfoot{}\def \@evenfoot{}%
