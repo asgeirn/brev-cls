@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.3 1996/04/20 15:24:28 ambolt Rel ambolt $
+% $Id: brev.cls,v 1.4 1996/04/22 18:44:06 ambolt Exp ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the name
@@ -13,8 +13,8 @@
 % The class is made and tested with A4 paper and 10pt font, but should
 % be portable to other dimensions as well.
 
-% The envelope used for defining this class has the following
-% characteristics:
+% The envelope used for defining this class is a C5/6 window envelope
+% with the following characteristics:
 % +------------------------------+
 % |                   |          |
 % | +-----------+ -   A          |
@@ -38,7 +38,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
 
-\ProvidesClass{brev}[1996/04/16 $Revision: 1.3 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/04/16 $Revision: 1.4 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -73,7 +73,7 @@
           \toname\\
           \toaddress
           \end{minipage}}}
-        \put(0,3.5){\makebox(0,0)[bl]{\begin{minipage}{7cm}
+        \put(0,4){\makebox(0,0)[bl]{\begin{minipage}{7cm}
           \ifx\@empty\fromname % In case you don't use \name
           \else
              \fromname\\
