@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.20 2003/07/28 19:33:54 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.21 2003/11/15 15:04:38 ambolt Exp ambolt $
 %
 % Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 %
@@ -112,6 +112,7 @@
 %   Petter Reinholdtsen <pere@opera.com>
 %   Toni Brkic <tbrkic@yahoo.com>
 %   Dennis Jørgensen <dnj@x.dtu.dk>
+%   Hans Fredrik Nordhaug <hansfn@mi.uib.no>
 %
 %% Latex requirement part:
 %
@@ -119,7 +120,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2003/07/28 19:33:54 $ v$Revision: 4.20 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2003/11/15 15:04:38 $ v$Revision: 4.21 $ Class for private letters]
 %
 %% Initial code part:
 %
@@ -147,7 +148,6 @@
 \newif\ifl@@bels
 \newif\ifl@@@bels
 \newif\ifr@gged
-\newif\ifl@st
 \l@belsfalse
 \l@@belsfalse
 \l@@@belsfalse
@@ -221,6 +221,7 @@
 \global\headsep=0pt
 \global\textheight\FIRST@textheight
 \ifr@gged\raggedright\fi
+%\def\@texttop{}
 
 %
 % Modify the first page layout:
@@ -243,7 +244,6 @@
   \divide\window@top\unitlength
 %  \setlength{\headsep}{\OLD@headsep}
   \divide\to@address\unitlength
-  \l@stfalse
   \def \@evenhead{%
     \begin{picture}(\number\box@width,\number\box@height)%
       \put(\number\to@address,\number\window@top){\makebox(0,0)[tl]{\begin{minipage}[c][20mm][c]{85mm}
@@ -289,7 +289,6 @@
     \end{picture}}%
   \def \@oddhead{\@evenhead}%
   \def \@oddfoot{%
-    \global\textheight\OLD@textheight%
     \global\headheight=0pt%
     \global\headsep=0pt}%
   \def \@evenfoot{}%
@@ -301,8 +300,7 @@
   \def \@oddhead{}%
   \def \@evenhead{}%
   \def \@evenfoot{\normalfont\rmfamily\normalsize\mdseries\upshape\hfil
-        -- \thepage\ --\hfil%
-        \ifl@st\global\textheight\FIRST@textheight\fi}%
+        -- \thepage\ --\hfil}
   \def \@oddfoot{\@evenfoot}%
 }
 %
@@ -310,6 +308,7 @@
 %
 \renewcommand{\opening}[1]{%
   \thispagestyle{firstpage} 
+  \global\textheight\OLD@textheight%
   {#1\par\nobreak}}
 %
 % Modify \closing:
@@ -324,9 +323,9 @@
   \ifx\@empty\fromsig
   \fromname
   \else \fromsig \fi\strut
-  \par}
+  \par
+  \global\textheight\FIRST@textheight}
 %
-\renewcommand{\stopletter}{\l@sttrue}
 \pagestyle{plain}
 %
 % Mailing labels:
@@ -347,10 +346,7 @@
 %% granted to distribute a modified version of this file under its 
 %% original name. 
 %% 
-\def\fileversion{10}
-\def\docdate{1995/06/22}
-\def\filedate{1995/06/22}
-\def\LabelsFileInfo{\filedate\space\fileversion}
+\def\LabelsFileInfo{1995/06/22\space10}
 %% File: labels.dtx  Copyright (C) 1993-1994-1995 by Sebastian Rahtz
 %%   and Grant Gustafson
 %% All rights reserved.
