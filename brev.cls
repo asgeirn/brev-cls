@@ -1,6 +1,6 @@
-% $Id: brev.cls,v 4.14 2000/11/22 22:17:30 ambolt Exp $
+% $Id: brev.cls,v 4.15 2001/07/30 20:08:26 ambolt Exp ambolt $
 %
-% Copyright © 1999-2000 Asgeir Nilsen <asgeirn@online.no>.  
+% Copyright © 1999-2000 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 % All rights reserved.
 %
 % The class is distributed for free use and modifications by anyone, 
@@ -93,7 +93,7 @@
 % The newest version of this class is always available at
 % ftp://mercury.chembio.ntnu.no/pub/latex/brev.cls
 %
-% Written by Asgeir Nilsen <asgeirn@online.no>
+% Written by Asgeir Nilsen <brevcls@asgeirnilsen.com>
 % With thanks to 
 %   Sebastian Rahtz and Grant Gustafson
 %   Dag Langmyhr <dag@ifi.uio.no>
@@ -106,6 +106,7 @@
 %   Anders Andersen <aa@computer.org>
 %   Nikolai Langfeldt <janl@linpro.no>
 %   Knut Anders Hatlen <kahatlen@online.no>
+%   Petter Reinholdtsen <pere@opera.com>
 %
 %% Latex requirement part:
 %
@@ -113,7 +114,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2000/11/22 22:17:30 $ v$Revision: 4.14 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2001/07/30 20:08:26 $ v$Revision: 4.15 $ Class for private letters]
 %
 %% Initial code part:
 %
