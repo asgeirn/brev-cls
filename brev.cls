@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.12 1999/08/13 09:28:42 ambolt Exp $
+% $Id: brev.cls,v 4.13 2000/07/26 13:21:10 ambolt Exp $
 %
 % Copyright © 1999-2000 Asgeir Nilsen <asgeirn@online.no>.  
 % All rights reserved.
@@ -114,8 +114,8 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date: 1999/08/13 09:28:42 $
-\RCS$Revision: 4.12 $
+\RCS$Date: 2000/07/26 13:21:10 $
+\RCS$Revision: 4.13 $
 
 \ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
@@ -227,7 +227,7 @@
   \setlength\box@height{\headheight}
   \setlength\window@top{\box@height}
   \divide\box@height\unitlength
-  \addtolength{\window@top}{-45mm}
+  \addtolength{\window@top}{-40mm}
   \divide\window@top\unitlength
 %  \setlength{\headsep}{\OLD@headsep}
   \divide\to@address\unitlength
