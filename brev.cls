@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.8 1998/01/12 20:28:54 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.9 1998/03/30 21:03:07 ambolt Exp $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -61,6 +61,7 @@
 %   Svend Tollak Munkejord <stm@stud.ntnu.no>
 %   Hans Peter Verne <hpv@kjemi.uio.no>
 %   Harald Hanche-Olsen <hanche@math.ntnu.no>
+%   Morten Simonsen <mortensi@idt.ntnu.no>
 
 %% Latex requirement part:
 
@@ -68,12 +69,14 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1998/01/12 Klasse for private brev]
+\ProvidesClass{brev}[$Date$ Klasse for private brev]
 
 %% Initial code part:
 
 \newlength{\topwidth}
 \newlength{\topadjust}
+\newlength{\box@width}
+\newlength{\half@box}
 \raggedright
 \newcommand*{\ourref}[1]{\def\oref{#1}}
 \newcommand*{\yourref}[1]{\def\yref{#1}}
@@ -130,36 +133,49 @@
 % Modify the first page layout:
 
 \def \ps@firstpage{%
-  \setlength\unitlength{1cm}
+  \setlength\unitlength{1mm}
   \setlength\topwidth{\textwidth}
   \addtolength\topwidth{\oddsidemargin}
   \setlength\topadjust{\topmargin}
   \addtolength\topadjust{1in}  % The 1in space given in the dvi drivers
   \addtolength\topadjust{\baselineskip} % The height of one line of text
   \addtolength\topadjust{-7cm} % The height of the picture environment
+  \setlength\box@width{\textwidth}
+  \divide\box@width\unitlength % This will be the width of the picture
+                               % environment
+  \setlength\half@box{\textwidth}
+  \addtolength\half@box{-8cm}  % This is the room left for the
+                               % \telephone field without clashing
+                               % with the window of the envelope.
   \def \@evenhead{\raisebox{\topadjust}[0pt][0pt]{%
-      \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(7,8)
-        \put(0,1.75){\makebox(0,0)[cl]{\begin{minipage}{8cm}
+      \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(70,\number\box@width)
+        \put(0,17.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
           \toname\\
           \expandafter\addressm@gic\toaddress\\\relax
           \end{minipage}}}
-        \put(0,4){\makebox(0,0)[bl]{\begin{minipage}{8cm}
+        \put(0,40){\makebox(0,0)[bl]{\begin{minipage}{\textwidth}
           \ifx\@empty\fromname % In case you don't use \name
           \else
              \fromname\\
           \fi
           \expandafter\addressm@gic\fromaddress\\\relax
           \end{minipage}}}
+        \ifx\@empty\telephonenum\else
+          \put(\number\box@width,0){\makebox(0,0)[br]{\begin{minipage}{\half@box}
+             \raggedleft
+             \telephonenum
+          \end{minipage}}}
+        \fi
         \ifx\@empty\yref\else %
-          {\put(0,-1){\makebox(0,0)[cl]{\captionyref\ \yref}}}
+          {\put(0,-10){\makebox(0,0)[cl]{\captionyref\ \yref}}}
         \fi
         \ifx\@empty\oref\else %
-          {\put(7,-1){\makebox(0,0)[cl]{\captionoref\ \oref}}}
+          {\put(70,-10){\makebox(0,0)[cl]{\captionoref\ \oref}}}
         \fi
         % These two folding lines are placed at 10.4mm from the left
         % edge of the paper, running left way off the edge. 
-        \put(-1.5,-3.5){\line(-1,0){2}}
-        \put(-1.5,-7.8){\line(-1,0){2}}
+        \put(-15,-35){\line(-1,0){20}}
+        \put(-15,-78){\line(-1,0){20}}
       \end{picture}\hss\raisebox{4cm}{%
           \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date}}}%
           % In case you don't use \location
