@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.13 2000/07/26 13:21:10 ambolt Exp $
+% $Id: brev.cls,v 4.14 2000/11/22 22:17:30 ambolt Exp $
 %
 % Copyright © 1999-2000 Asgeir Nilsen <asgeirn@online.no>.  
 % All rights reserved.
@@ -113,11 +113,7 @@
 %
 %% Identification part:
 %
-\RequirePackage{rcs}
-\RCS$Date: 2000/07/26 13:21:10 $
-\RCS$Revision: 4.13 $
-
-\ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
+\ProvidesClass{brev}[$Date: 2000/11/22 22:17:30 $ v$Revision: 4.14 $ Class for private letters]
 %
 %% Initial code part:
 %
