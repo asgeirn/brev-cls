@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.1 1996/04/16 20:19:20 ambolt Rel ambolt $
+% $Id: brev.cls,v 1.2 1996/04/16 21:08:42 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the name
@@ -36,9 +36,12 @@
 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
 
-\ProvidesClass{brev}[1996/04/16 $Revision: 1.1 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/04/16 $Revision: 1.2 $ Klasse for private brev]
 
 %% Initial code part:
+
+\newlength{\topwidth}
+\newlength{\topadjust}
 
 %% Options declaration part:
 
@@ -56,10 +59,8 @@
 
 \def \ps@firstpage{%
   \setlength\unitlength{1cm}
-  \newlength{\topwidth}
   \setlength\topwidth{\textwidth}
   \addtolength\topwidth{\oddsidemargin}
-  \newlength{\topadjust}
   \setlength\topadjust{\topmargin}
   \addtolength\topadjust{1in}  % The 1in space given in the dvi drivers
   \addtolength\topadjust{\baselineskip} % The height of one line of text
