@@ -1,15 +1,10 @@
-% $Id: brev.cls,v 2.3 1997/01/24 10:57:48 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.4 1997/01/26 15:55:42 ambolt Exp $
 
-%% USER CONFIGURABLE PART
-% There are two definitions which are user defineable.  These are used
-% for the captions for the ``Your ref.'' and ``Our ref.'' items in the
-% letterhead.  They default to the Norwegian versions of these.
-% Modify a needed.
-% I tried using babel for this, but could not make it work.  Any
-% suggestions on this is welcome.
-\def\captionoref{{\small Vår ref.:}}
-\def\captionyref{{\small Deres ref.:}}
-%% END OF USER CONFIGURABLE PART
+% Note: This class loads the babel package.
+% Specify the language in the \documentclass command:
+% \documentclass[norsk,...]{brev}
+% or
+% \documentclass[english,...]{brev}
 
 % This class introduces two new commands:
 % \yourref{text}        Inserts a ``Your ref'' caption with text at an
@@ -50,11 +45,20 @@
 % private, educational or commercial.  But I would like to hear about
 % any improvements!
 
+% There is a mailing list for news and updates for this class.  Send a
+% mail to majordomo@mercury.mnfak.unit.no with the text 
+% `subscribe brev-cls-list <your@email.address>' in the TEXT (NOT
+% subject) of the message.
+
+% The newest version of this class is always available at
+% ftp://ftp.nvg.ntnu.no/pub/latex/brev.cls. 
+
 % Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
 % With thanks to 
 %   Dag Langmyhr <dag@ifi.uio.no>
 %   Svend Tollak Munkejord <stm@stud.unit.no>
 %   Hans Peter Verne <hpv@kjemi.uio.no>
+%   Harald Hanche-Olsen <hanche@math.ntnu.no>
 
 %% Latex requirement part:
 
@@ -62,7 +66,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1997/01/26 $Revision: 2.3 $ Klasse for private brev]
+\ProvidesClass{brev}[1997/10/12 Klasse for private brev]
 
 %% Initial code part:
 
@@ -85,6 +89,18 @@
 %% Package loading part:
 
 \LoadClass[a4paper]{letter}
+\RequirePackage{babel}
+
+%% Babel part:
+
+\addto\extrasnorsk{%
+  \def\captionoref{{\small Vår ref.:}}%
+  \def\captionyref{{\small Deres ref.:}}%
+}
+\addto\extrasenglish{%
+  \def\captionoref{{\small Our ref.:}}%
+  \def\captionyref{{\small Your ref.:}}%
+}
 
 %% Modification part:
 
