@@ -1,11 +1,27 @@
-% $Id: brev.cls,v 2.1 1996/09/13 06:12:54 ambolt Rel ambolt $
+% $Id: brev.cls,v 2.2 1996/10/14 16:33:25 ambolt Exp ambolt $
+
+%% USER CONFIGURABLE PART
+% There are two definitions which are user defineable.  These are used
+% for the captions for the ``Your ref.'' and ``Our ref.'' items in the
+% letterhead.  They default to the Norwegian versions of these.
+% Modify a needed.
+% I tried using babel for this, but could not make it work.  Any
+% suggestions on this is welcome.
+\def\captionoref{{\small Vår ref.:}}
+\def\captionyref{{\small Deres ref.:}}
+%% END OF USER CONFIGURABLE PART
+
+% This class introduces two new commands:
+% \yourref{text}        Inserts a ``Your ref'' caption with text at an
+%                       appropriate place.
+% \ourref{text}         Does the same for ``Our ref''.
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
 % ``letter'' is the standard LaTeX letter class. 
 
-% The special characteristics of this style is the addresses field at
-% the top of the first page. This one is placed within a 7cm by 7cm
+% The special characteristics of this class is the addresses field at
+% the top of the first page. This one is placed within a 7cm by 8cm
 % picture element adjusted to the paper edge at the top and 1in from
 % the paper edge at the left.  The recipient address should be placed
 % within the window of window envelopes, and the sender address above
@@ -38,6 +54,7 @@
 % With thanks to 
 %   Dag Langmyhr <dag@ifi.uio.no>
 %   Svend Tollak Munkejord <stm@stud.unit.no>
+%   Hans Peter Verne <hpv@kjemi.uio.no>
 
 %% Latex requirement part:
 
@@ -45,13 +62,17 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1996/10/14 $Revision: 2.1 $ Klasse for private brev]
+\ProvidesClass{brev}[1997/01/24 $Revision: 2.2 $ Klasse for private brev]
 
 %% Initial code part:
 
 \newlength{\topwidth}
 \newlength{\topadjust}
 \raggedright
+\newcommand*{\ourref}[1]{\def\oref{#1}}
+\newcommand*{\yourref}[1]{\def\yref{#1}}
+\ourref{}
+\yourref{}
 
 %% Options declaration part:
 
@@ -96,6 +117,12 @@
           \fi
           \fromaddress
           \end{minipage}}}
+        \ifx\@empty\yref\else %
+          {\put(0,-1){\makebox(0,0)[cl]{\captionyref\ \yref}}}
+        \fi
+        \ifx\@empty\mref\else %
+          {\put(7,-1){\makebox(0,0)[cl]{\captionoref\ \oref}}}
+        \fi
 	% These two folding lines are placed at 5.4mm from the left
 	% edge of the paper, running left way off the edge. 
         \put(-2,-3.5){\line(-1,0){1}}
