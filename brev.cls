@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.7 1996/05/24 16:09:34 ambolt Exp ambolt $
+% $Id: brev.cls,v 1.8 1996/05/26 12:57:23 ambolt Exp ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
@@ -41,7 +41,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 
-\ProvidesClass{brev}[1996/05/26 $Revision: 1.7 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/05/26 $Revision: 1.8 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -105,8 +105,6 @@
 \renewcommand{\opening}[1]{%
   \thispagestyle{firstpage} 
   \vspace*{0,7cm}
-  {\bf#1\par\nobreak}}
+  {\textbf{#1}\par\nobreak}}
 
 \pagestyle{plain}
-
-
