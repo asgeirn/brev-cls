@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.6 1996/04/30 22:02:34 ambolt Rel ambolt $
+% $Id: brev.cls,v 1.7 1996/05/24 16:09:34 ambolt Exp ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
@@ -39,9 +39,9 @@
 
 %% Identification part:
 
-\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 
-\ProvidesClass{brev}[1996/04/16 $Revision: 1.6 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/05/26 $Revision: 1.7 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -50,15 +50,11 @@
 
 %% Options declaration part:
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
-
 %% Options execution part:
-
-\ProcessOptions
 
 %% Package loading part:
 
-\LoadClass[a4paper]{letter}
+\LoadClassWithOptions{letter}
 
 % Modify the first page layout:
 
