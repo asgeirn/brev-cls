@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.9 1998/03/30 21:03:07 ambolt Exp $
+% $Id: brev.cls,v 2.10 1998/04/24 11:16:18 ambolt Exp ambolt $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -69,7 +69,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[$Date$ Klasse for private brev]
+\ProvidesClass{brev}[1998/04/24 Klasse for private brev]
 
 %% Initial code part:
 
