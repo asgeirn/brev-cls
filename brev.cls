@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.6 1998/07/22 21:04:12 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.7 1998/09/21 19:54:47 ambolt Exp ambolt $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -70,8 +70,8 @@
 %
 % The class is distributed for free use and modifications by anyone, 
 % private, educational or commercial.  Permission is granted for
-% modifications and reuse for any purpose, as long as the author is
-% informed of this.
+% modifications and reuse for any purpose, as long as the original
+% author is informed of this.
 %
 % This package has shamelessly stolen the mailing label definitions
 % from Sebastian Rahtz' labels package.  The original copyright is
@@ -84,7 +84,7 @@
 % subject) of the message.
 %
 % The newest version of this class is always available at
-% ftp://mercury.kje.ntnu.no/pub/latex/brev.cls. 
+% ftp://mercury.kje.ntnu.no/pub/latex/brev.cls
 %
 % Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
 % With thanks to 
@@ -95,6 +95,7 @@
 %   Morten Simonsen <mortensi@idt.ntnu.no>
 %   Helge Avlesen <avle@ii.uib.no>
 %   Tage Stabell-Kulø <tage@ACM.org>
+%   Anders Andersen <Anders.Andersen@itek.norut.no>
 %
 %% Latex requirement part:
 %
@@ -103,10 +104,10 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date$
-\RCS$Revision$
+\RCS$Date: 1998/09/21 19:54:47 $
+\RCS$Revision: 4.7 $
 
-\ProvidesPackage{brev}[\RCSRawDate v\RCSRevision Class for private letters]
+\ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
 %% Initial code part:
 %
