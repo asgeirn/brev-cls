@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.2 1996/10/14 16:33:25 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.3 1997/01/24 10:57:48 ambolt Exp ambolt $
 
 %% USER CONFIGURABLE PART
 % There are two definitions which are user defineable.  These are used
@@ -62,7 +62,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1997/01/24 $Revision: 2.2 $ Klasse for private brev]
+\ProvidesClass{brev}[1997/01/26 $Revision: 2.3 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -120,7 +120,7 @@
         \ifx\@empty\yref\else %
           {\put(0,-1){\makebox(0,0)[cl]{\captionyref\ \yref}}}
         \fi
-        \ifx\@empty\mref\else %
+        \ifx\@empty\oref\else %
           {\put(7,-1){\makebox(0,0)[cl]{\captionoref\ \oref}}}
         \fi
 	% These two folding lines are placed at 5.4mm from the left
