@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.10 1999/05/25 16:43:30 ambolt Exp $
+% $Id: brev.cls,v 4.11 1999/06/16 20:27:58 ambolt Exp $
 %
 % This class is Copyright © 1999 Asgeir Nilsen <asgeirn@online.no>.  
 % All rights reserved.
@@ -27,6 +27,10 @@
 %
 % This class left-justifies the text (with \raggedright) by default.
 % To override this, use the `blockadjust' class option.
+%
+% The to-address is placed 5.4mm to the left of the left margin of the
+% letter, to place it correctly with respect to window envelopes.  To
+% avoid this, use the 'nowindow' class option.
 %
 % This class introduces three new commands:
 % \yourref{text}          Inserts a ``Your ref'' caption with text at an
@@ -100,6 +104,7 @@
 %   Tage Stabell-Kulø <tage@ACM.org>
 %   Anders Andersen <Anders.Andersen@itek.norut.no>
 %   Nikolai Langfeldt <janl@linpro.no>
+%   Knut Anders Hatlen <kahatlen@online.no>
 %
 %% Latex requirement part:
 %
@@ -108,8 +113,8 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date: 1999/05/25 16:43:30 $
-\RCS$Revision: 4.10 $
+\RCS$Date: 1999/06/16 20:27:58 $
+\RCS$Revision: 4.11 $
 
 \ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
@@ -122,6 +127,7 @@
 \newlength{\FIRST@textheight}
 \newlength{\OLD@textheight}
 \newlength{\OLD@headsep}
+\newlength{\to@address}
 \newcommand*{\ourref}[1]{\def\O@ref{#1}}
 \newcommand*{\yourref}[1]{\def\Y@ref{#1}}
 \def\Letter@Date(#1/#2/#3){%
@@ -148,10 +154,13 @@
 \DeclareOption{returnlabels}{\l@belstrue\l@@@belstrue}
 \DeclareOption{labels}{\l@belstrue\l@@belstrue}
 \DeclareOption{blockadjust}{\r@ggedfalse}
+\DeclareOption{window}{\setlength{\to@address}{-5.4mm}}
+\DeclareOption{nowindow}{\setlength{\to@address}{0mm}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
 %
 %% Options execution part:
 %
+\ExecuteOptions{window}
 \ProcessOptions
 %
 %% Package loading part:
@@ -216,10 +225,11 @@
   \addtolength{\window@top}{-45mm}
   \divide\window@top\unitlength
   \setlength{\headsep}{\OLD@headsep}
+  \divide\to@address\unitlength
   \l@stfalse
   \def \@evenhead{%
     \begin{picture}(\number\box@width,\number\box@height)%
-      \put(-5.4,\number\window@top){\makebox(0,0)[tl]{\begin{minipage}[c][20mm][c]{85mm}
+      \put(\number\to@address,\number\window@top){\makebox(0,0)[tl]{\begin{minipage}[c][20mm][c]{85mm}
             \toname\\
             \toaddress
           \end{minipage}}}%
