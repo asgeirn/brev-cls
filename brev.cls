@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.5 1998/07/22 21:03:41 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.6 1998/07/22 21:04:12 ambolt Exp ambolt $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -98,12 +98,15 @@
 %
 %% Latex requirement part:
 %
-\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 1998/07/22 21:03:41 $ v$Revision: 4.5 $ Class for private letters]
-%\ProvidesClass{brev}[1990/01/01 Class for private letters]
+\RequirePackage{rcs}
+\RCS$Date$
+\RCS$Revision$
+
+\ProvidesPackage{brev}[\RCSRawDate v\RCSRevision Class for private letters]
 %
 %% Initial code part:
 %
