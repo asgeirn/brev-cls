@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.17 2002/10/17 14:20:31 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.18 2003/01/22 22:48:04 ambolt Exp ambolt $
 %
 % Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 %
@@ -94,7 +94,7 @@
 % tall. 
 %
 % The newest version of this class is always available at
-% http://asgeinil.home.online.no/latex/
+% http://www.asgeirnilsen.com/latex/
 %
 % Written by Asgeir Nilsen <brevcls@asgeirnilsen.com>
 % With thanks to 
@@ -118,7 +118,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2002/10/17 14:20:31 $ v$Revision: 4.17 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2003/01/22 22:48:04 $ v$Revision: 4.18 $ Class for private letters]
 %
 %% Initial code part:
 %
