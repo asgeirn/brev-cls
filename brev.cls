@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.3 1998/05/15 11:12:32 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.4 1998/05/18 20:31:14 ambolt Exp ambolt $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -94,6 +94,7 @@
 %   Harald Hanche-Olsen <hanche@math.ntnu.no>
 %   Morten Simonsen <mortensi@idt.ntnu.no>
 %   Helge Avlesen <avle@ii.uib.no>
+%   Tage Stabell-Kulø <tage@ACM.org>
 %
 %% Latex requirement part:
 %
@@ -101,8 +102,8 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 1998/05/15 11:12:32 $ v$Revision: 4.3 $ Class for private letters]
-%\ProvidesClass{brev}[1990/01/01 Class for private letters]
+%\ProvidesClass{brev}[$Date: 1998/05/18 20:31:14 $ v$Revision: 4.4 $ Class for private letters]
+\ProvidesClass{brev}[1990/01/01 Class for private letters]
 %
 %% Initial code part:
 %
@@ -173,22 +174,7 @@
 \setlength{\OLD@headsep}{\headsep}
 \global\textheight\FIRST@textheight
 \ifr@gged\raggedright\fi
-%
-% Address magic
-%
-\def\postalm@gic#1 #2\relax{%
-  \ifx \relax#1\relax       % Is #1 a space?
-    \postalm@gic#2\relax
-  \else
-    \MakeUppercase{#1}\ \ \MakeUppercase{#2}
-  \fi}
-%
-\def\addressm@gic#1\\#2\relax{%
-  \ifx\relax#2\relax          % Is #2 empty?
-    \rule{0pt}{0pt}\\\postalm@gic#1\relax
-  \else
-    #1\\\addressm@gic#2\relax
-  \fi}
+
 %
 % Modify the first page layout:
 %
@@ -209,14 +195,14 @@
     \begin{picture}(\number\box@width,85)%
       \put(0,32.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
             \toname\\
-            \expandafter\addressm@gic\toaddress\\\relax
+            \toaddress
           \end{minipage}}}%
       \put(0,55){\makebox(0,0)[bl]{\begin{minipage}{\textwidth}
             \ifx\@empty\fromname % In case you don't use \name
             \else %
             \fromname\\
             \fi
-            \expandafter\addressm@gic\fromaddress\\\relax
+            \fromaddress
           \end{minipage}}}%
       \put(\number\box@width,55){\makebox(0,0)[br]{\begin{minipage}{\half@box}
             \raggedleft\ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
@@ -263,7 +249,7 @@
 %
 \renewcommand{\opening}[1]{%
   \thispagestyle{firstpage} 
-  {\textbf{#1}\par\nobreak}}
+  {#1\par\nobreak}}
 %
 % Modify \closing:
 %
@@ -443,8 +429,8 @@
 \newcommand{\labelsheet}[1]{\l@belsheet(#1)}
 %
 \renewcommand*{\mlabel}[2]{%
-  \ifx#1\@empty\else\addresslabel{\expandafter\addressm@gic#1\\\relax}\fi
-  \ifl@@bels\addresslabel{\expandafter\addressm@gic#2\\\relax}\fi}
+  \ifx#1\@empty\else\addresslabel{#1}\fi
+  \ifl@@bels\addresslabel{#2}\fi}
 %
 \ifl@bels\makelabels\fi
 \ifl@@@bels\renewcommand*{\returnaddress}{\fromname\\\fromaddress}\fi
