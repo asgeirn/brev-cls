@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.6 1997/12/20 12:53:55 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.7 1998/01/10 20:00:57 ambolt Exp ambolt $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -68,7 +68,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1998/01/10 Klasse for private brev]
+\ProvidesClass{brev}[1998/01/12 Klasse for private brev]
 
 %% Initial code part:
 
@@ -118,9 +118,11 @@
 
 % Address magic
 
+\def\postalm@gic#1 #2\relax{\MakeUppercase{#1}\ \ \MakeUppercase{#2}}
+
 \def\addressm@gic#1\\#2\relax{%
   \ifx\relax#2\relax          % Er #2 tom?
-    \rule{0pt}{0pt}\\\MakeUppercase{#1}
+    \rule{0pt}{0pt}\\\postalm@gic#1\relax
   \else
     #1\\\addressm@gic#2\relax
   \fi}
