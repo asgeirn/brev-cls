@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.13 1996/06/03 23:42:32 ambolt Rel ambolt $
+% $Id: brev.cls,v 2.0 1996/08/07 19:37:42 ambolt Exp ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
@@ -45,7 +45,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1996/08/06 $Revision: 1.13 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/09/13 $Revision: 2.0 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -100,7 +100,7 @@
 	% edge of the paper, running left way off the edge. 
         \put(-2,-3.5){\line(-1,0){1}}
         \put(-2,-7.8){\line(-1,0){1}}
-      \end{picture}\hss\raisebox{1cm}{%
+      \end{picture}\hss\raisebox{4cm}{%
           \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date}}}%
           % In case you don't use \location
   }%
