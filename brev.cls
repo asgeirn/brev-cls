@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.21 2003/11/15 15:04:38 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.22 2003/11/18 17:07:55 ambolt Exp ambolt $
 %
 % Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 %
@@ -48,7 +48,7 @@
 % \yourref{text}          Inserts a ``Your ref'' caption with text at an
 %                         appropriate place.
 % \ourref{text}           Does the same for ``Our ref''.
-% \LetterDate{yyyy/mm/dd} This command makes it easier to date a
+% \LetterDate{yyyy-mm-dd} This command makes it easier to date a
 %                         letter at a fixed date in a babel-compatible
 %                         way.  If this command is used (and \date is
 %                         not), the class will insert the given date
@@ -120,7 +120,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2003/11/15 15:04:38 $ v$Revision: 4.21 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2003/11/18 17:07:55 $ v$Revision: 4.22 $ Class for private letters]
 %
 %% Initial code part:
 %
