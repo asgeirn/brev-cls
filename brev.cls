@@ -1,4 +1,17 @@
-% $Id: brev.cls,v 4.8 1998/09/21 20:27:06 ambolt Exp $
+% $Id: brev.cls,v 4.9 1999/05/25 16:37:37 ambolt Exp $
+%
+% This class is Copyright © 1999 Asgeir Nilsen <asgeirn@online.no>.  
+% All rights reserved.
+%
+% The class is distributed for free use and modifications by anyone, 
+% private, educational or commercial.  Permission is granted for
+% modifications and reuse for any purpose, as long as the original
+% author is informed of this.
+%
+% This package has shamelessly stolen the mailing label definitions
+% from Sebastian Rahtz' labels package.  The original copyright is
+% within the redefinition of letter.cls' \startlabels at the end of
+% this file.
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -15,10 +28,16 @@
 % This class left-justifies the text (with \raggedright) by default.
 % To override this, use the `blockadjust' class option.
 %
-% This class introduces two new commands:
-% \yourref{text}        Inserts a ``Your ref'' caption with text at an
-%                       appropriate place.
-% \ourref{text}         Does the same for ``Our ref''.
+% This class introduces three new commands:
+% \yourref{text}          Inserts a ``Your ref'' caption with text at an
+%                         appropriate place.
+% \ourref{text}           Does the same for ``Our ref''.
+% \LetterDate{yyyy/mm/dd} This command makes it easier to date a
+%                         letter at a fixed date in a babel-compatible
+%                         way.  If this command is used (and \date is
+%                         not), the class will insert the given date
+%                         in the default form for the selected
+%                         language. 
 %
 % This class also supports mailing labels via two class options and
 % two new commands.
@@ -43,8 +62,8 @@
 %                       standard for A4 sheets).
 %
 % A little letter class for personal letters.  It is called ``brev''
-% because that is the Norwegian name for letter, and the class
-% ``letter'' is the standard LaTeX letter class. 
+% because that is the Norwegian name for letter, and for avoiding name
+% clashes with the standard LaTeX letter class. 
 %
 % The special characteristics of this class is the addresses field at
 % the top of the first page. This one is placed within a 7cm by 8cm
@@ -62,18 +81,6 @@
 % of the envelope, 15mm from the left edge and is 95mm wide and 30mm
 % tall. 
 %
-% This class is Copyright © 1999 Asgeir Nilsen.  All rights reserved.
-%
-% The class is distributed for free use and modifications by anyone, 
-% private, educational or commercial.  Permission is granted for
-% modifications and reuse for any purpose, as long as the original
-% author is informed of this.
-%
-% This package has shamelessly stolen the mailing label definitions
-% from Sebastian Rahtz' labels package.  The original copyright is
-% within the redefinition of letter.cls' \startlabels at the end of
-% this file.
-%
 % There is a mailing list for news and updates for this class.  Send a
 % mail to majordomo@mercury.kje.ntnu.no with the text 
 % `subscribe brev-cls-list <your@email.address>' in the TEXT (NOT
@@ -82,7 +89,7 @@
 % The newest version of this class is always available at
 % ftp://mercury.kje.ntnu.no/pub/latex/brev.cls
 %
-% Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
+% Written by Asgeir Nilsen <asgeirn@online.no>
 % With thanks to 
 %   Dag Langmyhr <dag@ifi.uio.no>
 %   Svend Tollak Munkejord <stm@stud.ntnu.no>
@@ -100,8 +107,8 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date: 1998/09/21 20:27:06 $
-\RCS$Revision: 4.8 $
+\RCS$Date: 1999/05/25 16:37:37 $
+\RCS$Revision: 4.9 $
 
 \ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
