@@ -1,12 +1,20 @@
-% $Id: brev.cls,v 4.16 2001/07/30 20:14:20 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.17 2002/10/17 14:20:31 ambolt Exp ambolt $
 %
-% Copyright © 1999-2000 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
-% All rights reserved.
+% Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 %
-% The class is distributed for free use and modifications by anyone, 
-% private, educational or commercial.  Permission is granted for
-% modifications and reuse for any purpose, as long as the original
-% author is informed of this.
+%    This program is free software; you can redistribute it and/or modify
+%    it under the terms of the GNU General Public License as published by
+%    the Free Software Foundation; either version 2 of the License, or
+%    (at your option) any later version.
+%
+%    This program is distributed in the hope that it will be useful,
+%    but WITHOUT ANY WARRANTY; without even the implied warranty of
+%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%    GNU General Public License for more details.
+%
+%    You should have received a copy of the GNU General Public License
+%    along with this program; if not, write to the Free Software
+%    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 %
 % This package has shamelessly stolen the mailing label definitions
 % from Sebastian Rahtz' and Grant Gustafson's labels package.  The
@@ -85,13 +93,8 @@
 % of the envelope, 15mm from the left edge and is 95mm wide and 30mm
 % tall. 
 %
-% There is a mailing list for news and updates for this class.  Send a
-% mail to majordomo@mercury.chembio.ntnu.no with the text 
-% `subscribe brev-cls-list <your@email.address>' in the TEXT (NOT
-% subject) of the message.
-%
 % The newest version of this class is always available at
-% ftp://mercury.chembio.ntnu.no/pub/latex/brev.cls
+% http://asgeinil.home.online.no/latex/
 %
 % Written by Asgeir Nilsen <brevcls@asgeirnilsen.com>
 % With thanks to 
@@ -107,6 +110,7 @@
 %   Nikolai Langfeldt <janl@linpro.no>
 %   Knut Anders Hatlen <kahatlen@online.no>
 %   Petter Reinholdtsen <pere@opera.com>
+%   Toni Brkic <tbrkic@yahoo.com>
 %
 %% Latex requirement part:
 %
@@ -114,7 +118,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2001/07/30 20:14:20 $ v$Revision: 4.16 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2002/10/17 14:20:31 $ v$Revision: 4.17 $ Class for private letters]
 %
 %% Initial code part:
 %
@@ -137,6 +141,7 @@
 \def\Date@Year{}
 \ourref{}
 \yourref{}
+\def\O@nofoldinglines{}
 \newif\ifl@bels
 \newif\ifl@@bels
 \newif\ifl@@@bels
@@ -154,6 +159,7 @@
 \DeclareOption{blockadjust}{\r@ggedfalse}
 \DeclareOption{window}{\setlength{\to@address}{-5.4mm}}
 \DeclareOption{nowindow}{\setlength{\to@address}{0mm}}
+\DeclareOption{nofoldinglines}{\setlength{\to@address}{\def\O@nofoldinglines{true}}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
 %
 %% Options execution part:
@@ -168,6 +174,10 @@
 %
 %% Babel part:
 %
+\addto\extrasswedish{%
+  \def\captionO@ref{{\small V{\aa}r ref.:}}%
+  \def\captionY@ref{{\small Er ref.:}}%
+}
 \addto\extrasnynorsk{%
   \def\captionO@ref{{\small V{\aa}r ref.:}}%
   \def\captionY@ref{{\small Dykkar ref.:}}%
@@ -267,8 +277,10 @@
 %     \put(0,0){\vector(0,1){\number\box@height}}%
       % These two folding lines are placed at 10.4mm from the left
       % edge of the paper, running left way off the edge. 
+      \ifx\@empty\O@nofoldinglines
       \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
       \put(-15,-63){\makebox(0,0)[cl]{\line(-1,0){20}}}%
+      \fi%
     \end{picture}}%
   \def \@oddhead{\@evenhead}%
   \def \@oddfoot{%
