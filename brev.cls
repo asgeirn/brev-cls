@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.10 1998/04/24 11:16:18 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.11 1998/04/24 11:17:52 ambolt Exp $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -13,6 +13,24 @@
 %                       appropriate place.
 % \ourref{text}         Does the same for ``Our ref''.
 
+% This class also supports mailing labels via two class arguments and
+% one new command.
+% The label sheets supported are the ones with 7x3 labels on letter
+% paper, and 8x3 labels on A4 paper.
+% 
+% labels                Creates mailing labels for the recipient of
+%                       each letter environment.  To create extra
+%                       labels, insert empty letter environments.
+% returnlabels          Creates mailing labels for the return
+%                       addresses of each letter environment.
+% \skiplabels{num}      Skips the given number of labels before
+%                       starting populating the labels.  This is handy
+%                       for using the same label sheet several times.
+%                       WARNING: If you insert a label sheet with some
+%                       of the labels removed, the paper might jam in
+%                       your printer.  Use with caution!
+%                       This command must be given in the preamble.
+
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
 % ``letter'' is the standard LaTeX letter class. 
@@ -26,8 +44,6 @@
 % Two folding lines is also provided for folding the letter correctly
 % both in C5 og E65 envelopes.  These lines are placed 10.5cm and
 % 14.8cm from the top edge of the paper. 
-% This class tries to look like the Norwegian standard letter, but is
-% probably wrong. 
 % The class is made and tested with A4 paper, but should be portable
 % to other dimensions as well.  
 
@@ -46,6 +62,11 @@
 % The class is distributed for free use and modifications by anyone,
 % private, educational or commercial.  But I would like to hear about
 % any improvements!
+
+% This package has shamelessly stolen the mailing label definitions
+% from Sebastian Rahtz' labels package.  The original copyright is
+% within the redefinition of letter.cls' \startlabels at the end of
+% this file.
 
 % There is a mailing list for news and updates for this class.  Send a
 % mail to majordomo@mercury.kje.ntnu.no with the text 
@@ -69,7 +90,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1998/04/24 Klasse for private brev]
+\ProvidesClass{brev}[1998/05/05 Class for private letters]
 
 %% Initial code part:
 
@@ -82,9 +103,17 @@
 \newcommand*{\yourref}[1]{\def\yref{#1}}
 \ourref{}
 \yourref{}
+\newif\ifl@bels
+\newif\ifl@@bels
+\newif\ifl@@@bels
+\l@belsfalse
+\l@@belsfalse
+\l@@@belsfalse
 
 %% Options declaration part:
 
+\DeclareOption{returnlabels}{\l@belstrue\l@@@belstrue}
+\DeclareOption{labels}{\l@belstrue\l@@belstrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
 
 %% Options execution part:
@@ -121,10 +150,15 @@
 
 % Address magic
 
-\def\postalm@gic#1 #2\relax{\MakeUppercase{#1}\ \ \MakeUppercase{#2}}
+\def\postalm@gic#1 #2\relax{%
+  \ifx \relax#1\relax       % Is #1 a space?
+    \postalm@gic#2\relax
+  \else
+    \MakeUppercase{#1}\ \ \MakeUppercase{#2}
+  \fi}
 
 \def\addressm@gic#1\\#2\relax{%
-  \ifx\relax#2\relax          % Er #2 tom?
+  \ifx\relax#2\relax          % Is #2 empty?
     \rule{0pt}{0pt}\\\postalm@gic#1\relax
   \else
     #1\\\addressm@gic#2\relax
@@ -160,6 +194,11 @@
           \fi
           \expandafter\addressm@gic\fromaddress\\\relax
           \end{minipage}}}
+        \put(\number\box@width,40){\makebox(0,0)[br]{\begin{minipage}{\half@box}
+          \raggedleft
+          \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
+          % In case you don't use \location
+          \end{minipage}}}
         \ifx\@empty\telephonenum\else
           \put(\number\box@width,0){\makebox(0,0)[br]{\begin{minipage}{\half@box}
              \raggedleft
@@ -176,9 +215,7 @@
         % edge of the paper, running left way off the edge. 
         \put(-15,-35){\line(-1,0){20}}
         \put(-15,-78){\line(-1,0){20}}
-      \end{picture}\hss\raisebox{4cm}{%
-          \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date}}}%
-          % In case you don't use \location
+      \end{picture}}}%
   }%
   \def \@oddhead{\@evenhead}%
   \def \@oddfoot{}\def \@evenfoot{}%
@@ -215,5 +252,183 @@
   \par}
 
 \pagestyle{plain}
+
+% Mailing labels:
+
+\renewcommand*{\startlabels}{\pagestyle{empty}%
+%% 
+%% This is file `labels.sty',
+%% generated with the docstrip utility.
+%% 
+%% The original source files were:
+%% 
+%% labels.dtx  (with options: `package')
+%% Copyright (C) 1993-1994-1995 by Sebastian Rahtz 
+%% All rights reserved. 
+%% 
+%% Permission is granted to to customize the declarations in this file to 
+%% serve the needs of your installation. However, no permission is 
+%% granted to distribute a modified version of this file under its 
+%% original name. 
+%% 
+\def\fileversion{10}
+\def\docdate{1995/06/22}
+\def\filedate{1995/06/22}
+\def\LabelsFileInfo{\filedate\space\fileversion}
+%% File: labels.dtx  Copyright (C) 1993-1994-1995 by Sebastian Rahtz
+%%   and Grant Gustafson
+%% All rights reserved.
+\newcount\LabelCols
+\newcount\LabelRows
+\newdimen\LeftBorder
+\newdimen\RightBorder
+\newdimen\TopBorder
+\newdimen\BottomBorder
+\newcount\numberoflabels
+\newdimen\label@width
+\newdimen\label@height
+\newdimen\half@label
+\newdimen\area@width
+\newdimen\addr@width
+\newdimen\LabTmp
+\newsavebox{\this@label}
+\newcount\label@number
+\newcount\skip@labels
+\newcount\l@so@far
+\newif\ifLabelGrid
+\newif\iffirst@label
+\newif\ifLabelInfo
+\first@labeltrue
+\LabelGridfalse
+\LabelInfofalse
+\ifdim\paperwidth=210mm\relax%
+   \LabelCols=3\relax\LabelRows=8\relax% a4paper
+\else
+   \LabelCols=3\relax\LabelRows=7\relax% letterpaper
+\fi%
+\LeftBorder=8mm
+\RightBorder=8mm
+\TopBorder=9mm
+\BottomBorder=2mm
+\textwidth=\paperwidth
+\textheight=\paperheight
+\topmargin=-1in
+\headheight=0em
+\headsep=0em
+\topskip=0em
+\footskip=0em
+\oddsidemargin=-1in
+\evensidemargin=-1in
+\pagestyle{empty}
+\parindent=0em
+\parskip=0pt
+\def\@LabelSetup{%
+\global\label@width\textwidth%
+\global\divide\label@width by\LabelCols%
+\global\label@height\textheight%
+\global\advance\label@height by-\TopBorder%
+\global\advance\label@height by-\BottomBorder%
+\global\divide\label@height by\LabelRows%
+\global\topmargin=-1in\global\advance\topmargin by\TopBorder%
+\global\area@width=\label@width%
+\global\advance\area@width by -\LeftBorder%
+\global\advance\area@width by -\RightBorder%
+\ifLabelGrid%
+\global\advance\area@width by-2\fboxsep%
+\global\advance\area@width by-2\fboxrule%
+\fi%
+\ifLabelGrid%
+\global\advance\label@height by-2\fboxsep%
+\global\advance\label@height by-2\fboxrule%
+\fi%
+\global\half@label=\label@height\divide\half@label by2\relax
+\global\label@number=1\relax
+}
+\def\LabelSetup{\@LabelSetup%
+\ifLabelInfo
+   \typeout{Control sequences adjustable in the preamble:}
+   \typeout{\LabelRows=\the\LabelRows}
+   \typeout{\LabelCols=\the\LabelCols}
+   \TypeoutBlurb{\TopBorder}{\TopBorder}
+   \TypeoutBlurb{\BottomBorder}{\BottomBorder}
+   \TypeoutBlurb{\LeftBorder}{\LeftBorder}
+   \TypeoutBlurb{\RightBorder}{\RightBorder}
+   \typeout{Computed values:}
+   \TypeoutBlurb{Label Width}{\label@width}
+   \TypeoutBlurb{Label Height}{\label@height}
+%\else
+%   \typeout{To print info, put `\protect\LabelInfotrue' in the preamble}
+\fi
+}
+\numberoflabels=1%
+\def\sticky@label{\l@so@far=0%
+\loop\ifnum\l@so@far<\numberoflabels\advance\l@so@far by 1\make@label%
+\repeat}
+\def\make@label{%
+\ifLabelGrid%
+ \let\boxing@type\framebox%
+\else%
+ \let\boxing@type\makebox%
+\fi%
+\settowidth{\LabTmp}{\usebox{\this@label}}%
+\ifdim\LabTmp=0cm\let\action=\relax\else\let\action=\BuildB@x\fi%
+\advance\LabTmp by -\area@width%
+\ifdim\LabTmp>0cm\relax\fi%
+\settoheight{\LabTmp}%
+{\begin{tabular}{l}\usebox{\this@label}\end{tabular}}%
+\advance\LabTmp by -\half@label%
+\ifdim\LabTmp>0cm\relax%
+\LabTmp=2\LabTmp\fi%
+\ifnum\skip@labels<\sk@pped\let\action=\BuildB@x\fi%
+\action
+}
+\def\BuildB@x{%
+\boxing@type[\label@width][c]{%
+\rule{0pt}{\label@height}%
+\raisebox{\half@label}[0pt][0pt]{%
+\rule{\LeftBorder}{0pt}%
+\usebox{\this@label}%
+\rule{\RightBorder}{0pt}%
+}}%
+\ifnum\skip@labels<\sk@pped\message{x}\else\message{+}\fi%
+\ifnum\label@number=\LabelCols%
+\message{|}%
+\endgraf\nointerlineskip%
+\global\label@number=1\else\global\advance\label@number by 1\fi%
+}%
+%
+\ifnum\theskiplabels>0
+\numberoflabels=\theskiplabels
+\addresslabel{\rule{0pt}{0pt}}
+\numberoflabels=1
+\fi
+}
+
+\newcount\@Milli
+\def\ToMilli#1{\@Milli=#1\advance\@Milli by93225\relax
+\divide\@Milli by 186450\relax}
+\newcommand{\genericlabel}[1]{%
+\iffirst@label\LabelSetup\first@labelfalse\fi%
+\savebox{\this@label}{#1}\sticky@label\@gobblecr}
+\long\def\L@dblarg#1{\@ifnextchar[{#1}{\L@xdblarg{#1}}}
+\long\def\L@xdblarg#1#2{#1[]{#2}}
+\long\def\addresslabel{\L@dblarg{\@addresslabel}}
+\long\def\@addresslabel[#1]#2{\genericlabel{#1%
+\begin{tabular}{@{}p{\area@width}@{}}\raggedright #2\end{tabular}}}
+\long\def\boxedaddresslabel{\L@dblarg{\@boxedaddresslabel}}
+\long\def\@boxedaddresslabel[#1]#2{\genericlabel{#1%
+\addr@width=\area@width\advance\addr@width by-2\fboxsep%
+\advance\addr@width by-2\fboxrule\fbox{%
+\begin{tabular}{@{}p{\addr@width}@{}}\raggedright #2\end{tabular}}}}
+\newcount\sk@pped
+\newcounter{skiplabels}
+\def\skiplabels#1{\setcounter{skiplabels}{#1}}
+
+\renewcommand*{\mlabel}[2]{%
+  \ifx#1\@empty\else\addresslabel{\expandafter\addressm@gic#1\\\relax}\fi
+  \ifl@@bels\addresslabel{\expandafter\addressm@gic#2\\\relax}\fi}
+
+\ifl@bels\makelabels\fi
+\ifl@@@bels\renewcommand*{\returnaddress}{\fromname\\\fromaddress}\fi
 
 % End of brev.cls
