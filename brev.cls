@@ -1,6 +1,6 @@
-% $Id: brev.cls,v 4.11 1999/06/16 20:27:58 ambolt Exp $
+% $Id: brev.cls,v 4.12 1999/08/13 09:28:42 ambolt Exp $
 %
-% This class is Copyright © 1999 Asgeir Nilsen <asgeirn@online.no>.  
+% Copyright © 1999-2000 Asgeir Nilsen <asgeirn@online.no>.  
 % All rights reserved.
 %
 % The class is distributed for free use and modifications by anyone, 
@@ -9,9 +9,13 @@
 % author is informed of this.
 %
 % This package has shamelessly stolen the mailing label definitions
-% from Sebastian Rahtz' labels package.  The original copyright is
-% within the redefinition of letter.cls' \startlabels at the end of
-% this file.
+% from Sebastian Rahtz' and Grant Gustafson's labels package.  The
+% original copyright is within the redefinition of letter.cls'
+% \startlabels at the end of this file.
+%
+% A little letter class for personal letters.  It is called ``brev''
+% because that is the Norwegian name for letter, and for avoiding name
+% clashes with the standard LaTeX letter class. 
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -30,7 +34,7 @@
 %
 % The to-address is placed 5.4mm to the left of the left margin of the
 % letter, to place it correctly with respect to window envelopes.  To
-% avoid this, use the 'nowindow' class option.
+% disable this, use the 'nowindow' class option.
 %
 % This class introduces three new commands:
 % \yourref{text}          Inserts a ``Your ref'' caption with text at an
@@ -65,10 +69,6 @@
 %                       sheet with 8 rows with 3 labels each (quite
 %                       standard for A4 sheets).
 %
-% A little letter class for personal letters.  It is called ``brev''
-% because that is the Norwegian name for letter, and for avoiding name
-% clashes with the standard LaTeX letter class. 
-%
 % The special characteristics of this class is the addresses field at
 % the top of the first page. This one is placed within a 7cm by 8cm
 % picture element adjusted to the paper edge at the top and 1in from
@@ -86,15 +86,16 @@
 % tall. 
 %
 % There is a mailing list for news and updates for this class.  Send a
-% mail to majordomo@mercury.kje.ntnu.no with the text 
+% mail to majordomo@mercury.chembio.ntnu.no with the text 
 % `subscribe brev-cls-list <your@email.address>' in the TEXT (NOT
 % subject) of the message.
 %
 % The newest version of this class is always available at
-% ftp://mercury.kje.ntnu.no/pub/latex/brev.cls
+% ftp://mercury.chembio.ntnu.no/pub/latex/brev.cls
 %
 % Written by Asgeir Nilsen <asgeirn@online.no>
 % With thanks to 
+%   Sebastian Rahtz and Grant Gustafson
 %   Dag Langmyhr <dag@ifi.uio.no>
 %   Svend Tollak Munkejord <stm@stud.ntnu.no>
 %   Hans Peter Verne <hpv@kjemi.uio.no>
@@ -102,7 +103,7 @@
 %   Morten Simonsen <mortensi@idt.ntnu.no>
 %   Helge Avlesen <avle@ii.uib.no>
 %   Tage Stabell-Kulø <tage@ACM.org>
-%   Anders Andersen <Anders.Andersen@itek.norut.no>
+%   Anders Andersen <aa@computer.org>
 %   Nikolai Langfeldt <janl@linpro.no>
 %   Knut Anders Hatlen <kahatlen@online.no>
 %
@@ -113,8 +114,8 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date: 1999/06/16 20:27:58 $
-\RCS$Revision: 4.11 $
+\RCS$Date: 1999/08/13 09:28:42 $
+\RCS$Revision: 4.12 $
 
 \ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
@@ -202,6 +203,10 @@
 \addtolength{\OLD@textheight}{\headheight}
 \addtolength{\OLD@textheight}{\headsep}
 \setlength{\OLD@headsep}{\headsep}
+\addtolength{\FIRST@textheight}{\topskip}
+\addtolength{\FIRST@textheight}{\headsep}
+\global\topskip=0pt
+\global\headsep=0pt
 \global\textheight\FIRST@textheight
 \ifr@gged\raggedright\fi
 
@@ -224,7 +229,7 @@
   \divide\box@height\unitlength
   \addtolength{\window@top}{-45mm}
   \divide\window@top\unitlength
-  \setlength{\headsep}{\OLD@headsep}
+%  \setlength{\headsep}{\OLD@headsep}
   \divide\to@address\unitlength
   \l@stfalse
   \def \@evenhead{%
@@ -261,8 +266,8 @@
       \ifx\@empty\O@ref\else %
       \put(70,5){\makebox(0,0)[cl]{\captionO@ref\ \O@ref}}%
       \fi%
-%      \put(0,0){\vector(1,0){\number\box@width}}%
-%      \put(0,0){\vector(0,1){\number\box@height}}%
+%     \put(0,0){\vector(1,0){\number\box@width}}%
+%     \put(0,0){\vector(0,1){\number\box@height}}%
       % These two folding lines are placed at 10.4mm from the left
       % edge of the paper, running left way off the edge. 
       \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
