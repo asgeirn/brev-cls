@@ -1,13 +1,8 @@
-% $Id: brev.cls,v 1.12 1996/06/01 15:59:46 ambolt Rel ambolt $
+% $Id: brev.cls,v 1.13 1996/06/03 23:42:32 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
 % ``letter'' is the standard LaTeX letter class. 
-
-% This version originally requires LaTeX 2e version 1995/12/01 or
-% later.  If you're not using this, please patch the file with
-% itself.  A patch to downgrade this class to the 1994/12/01 version
-% is at the bottom of this file.
 
 % The special characteristics of this style is the addresses field at
 % the top of the first page. This one is placed within a 7cm by 7cm
@@ -18,7 +13,9 @@
 % Two folding lines is also provided for folding the letter correctly
 % both in E5 og E65 envelopes.  These are lines placed 10.5cm and
 % 14.8cm from the top edge of the paper. 
-% The class is made and tested with A4 paper and 10pt font, but should
+% This class tries to look like the Norwegian standard letter, but is
+% probably wrong. 
+% The class is made and tested with A4 paper and 11pt font, but should
 % be portable to other dimensions as well. 
 
 % The envelope used for defining this class is a E65 window envelope
@@ -44,24 +41,37 @@
 
 %% Latex requirement part:
 
-\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
 
 %% Identification part:
 
-\ProvidesClass{brev}[1996/06/04 $Revision: 1.12 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/08/06 $Revision: 1.13 $ Klasse for private brev]
 
 %% Initial code part:
 
 \newlength{\topwidth}
 \newlength{\topadjust}
+\raggedright
 
 %% Options declaration part:
 
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
+
 %% Options execution part:
+
+\ProcessOptions
 
 %% Package loading part:
 
-\LoadClassWithOptions{letter}
+\LoadClass[a4paper,11pt]{letter}
+
+%% Modification part:
+
+\addtolength{\textwidth}{\oddsidemargin}
+\setlength{\oddsidemargin}{0pt}
+\addtolength{\textwidth}{\evensidemargin}
+\setlength{\evensidemargin}{0pt}
+\setlength{\longindentation}{0pt}
 
 % Modify the first page layout:
 
@@ -114,37 +124,20 @@
   \vspace*{0,7cm}
   {\textbf{#1}\par\nobreak}}
 
+% Modify \closing:
+
+\renewcommand{\closing}[1]{\par\nobreak\vspace{5\parskip}%
+  \stopbreaks
+  \noindent
+  \ifx\@empty\fromaddress\else
+  \hspace*{\longindentation}\fi
+  \parbox{\indentedwidth}{\raggedright
+       \ignorespaces #1\\[6\medskipamount]%
+       \ifx\@empty\fromsig
+           \fromname
+       \else \fromsig \fi\strut}%
+   \par}
+
 \pagestyle{plain}
-% The following is a patch for those not using the 1995/12/01 or later
-% version of LaTeX 2e.  It replaces the LoadClassWithOptions command
-% with older equivalents.
-% Just use `patch < brev.cls` to use this patch.
-\endinput
---- brev.cls	Tue Jun  4 01:41:25 1996
-+++ brev.old.cls	Tue Jun  4 01:41:30 1996
-@@ -44,7 +44,7 @@
- 
- %% Latex requirement part:
- 
--\NeedsTeXFormat{LaTeX2e}[1995/12/01]
-+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
- 
- %% Identification part:
- 
-@@ -57,11 +57,15 @@
- 
- %% Options declaration part:
- 
-+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
-+
- %% Options execution part:
- 
-+\ProcessOptions
-+
- %% Package loading part:
- 
--\LoadClassWithOptions{letter}
-+\LoadClass[a4paper]{letter}
- 
- % Modify the first page layout:
- 
+
+% End of brev.cls
