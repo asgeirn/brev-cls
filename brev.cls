@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.11 1998/04/24 11:17:52 ambolt Exp $
+% $Id: brev.cls,v 3.0 1998/05/05 19:01:03 ambolt Exp ambolt $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -59,9 +59,12 @@
 % Dimension A (from top edge of env. to bot. edge of win): 7cm
 % Dimension B (height of window)                         : 3cm
 
-% The class is distributed for free use and modifications by anyone,
-% private, educational or commercial.  But I would like to hear about
-% any improvements!
+% This class is Copyright © 1998 Asgeir Nilsen.  All rights reserved.
+
+% The class is distributed for free use and modifications by anyone, 
+% private, educational or commercial.  Permission is granted for
+% modifications and reuse for any purpose, as long as the author is
+% informed of this.
 
 % This package has shamelessly stolen the mailing label definitions
 % from Sebastian Rahtz' labels package.  The original copyright is
