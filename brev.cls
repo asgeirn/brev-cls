@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.5 1997/10/11 22:41:24 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.6 1997/12/20 12:53:55 ambolt Exp ambolt $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -48,12 +48,12 @@
 % any improvements!
 
 % There is a mailing list for news and updates for this class.  Send a
-% mail to majordomo@mercury.mnfak.unit.no with the text 
+% mail to majordomo@mercury.kje.ntnu.no with the text 
 % `subscribe brev-cls-list <your@email.address>' in the TEXT (NOT
 % subject) of the message.
 
 % The newest version of this class is always available at
-% ftp://ftp.nvg.ntnu.no/pub/latex/brev.cls. 
+% ftp://mercury.kje.ntnu.no/pub/latex/brev.cls. 
 
 % Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
 % With thanks to 
@@ -68,7 +68,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1997/12/20 Klasse for private brev]
+\ProvidesClass{brev}[1998/01/10 Klasse for private brev]
 
 %% Initial code part:
 
@@ -116,6 +116,15 @@
 \setlength{\evensidemargin}{0pt}
 \setlength{\longindentation}{0pt}
 
+% Address magic
+
+\def\addressm@gic#1\\#2\relax{%
+  \ifx\relax#2\relax          % Er #2 tom?
+    \rule{0pt}{0pt}\\\MakeUppercase{#1}
+  \else
+    #1\\\addressm@gic#2\relax
+  \fi}
+
 % Modify the first page layout:
 
 \def \ps@firstpage{%
@@ -130,14 +139,14 @@
       \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(7,8)
         \put(0,1.75){\makebox(0,0)[cl]{\begin{minipage}{8cm}
           \toname\\
-          \toaddress
+          \expandafter\addressm@gic\toaddress\\\relax
           \end{minipage}}}
         \put(0,4){\makebox(0,0)[bl]{\begin{minipage}{8cm}
           \ifx\@empty\fromname % In case you don't use \name
           \else
              \fromname\\
           \fi
-          \fromaddress
+          \expandafter\addressm@gic\fromaddress\\\relax
           \end{minipage}}}
         \ifx\@empty\yref\else %
           {\put(0,-1){\makebox(0,0)[cl]{\captionyref\ \yref}}}
