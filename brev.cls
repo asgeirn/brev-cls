@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.7 1998/09/21 19:54:47 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.8 1998/09/21 20:27:06 ambolt Exp $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -7,6 +7,10 @@
 % \documentclass[nynorsk,...]{brev}
 % or
 % \documentclass[english,...]{brev}
+% or
+% \documentclass[american,...]{brev}
+%
+% Feel free to add more languages as necessary (and please do inform me) 
 %
 % This class left-justifies the text (with \raggedright) by default.
 % To override this, use the `blockadjust' class option.
@@ -54,19 +58,11 @@
 % The class is made and tested with A4 paper, but should be portable
 % to other dimensions as well.  
 %
-% The envelope used for defining this class is a E65 window envelope
-% with the following characteristics:
-% +------------------------------+
-% |                   |          |
-% | +-----------+ -   A          |
-% | |           | B   |          |
-% | +-----------+ -   -          |
-% |                              |
-% +------------------------------+
-% Dimension A (from top edge of env. to bot. edge of win): 7cm
-% Dimension B (height of window)                         : 3cm
+% This class assumes that the window is placed 40mm from the top edge
+% of the envelope, 15mm from the left edge and is 95mm wide and 30mm
+% tall. 
 %
-% This class is Copyright © 1998 Asgeir Nilsen.  All rights reserved.
+% This class is Copyright © 1999 Asgeir Nilsen.  All rights reserved.
 %
 % The class is distributed for free use and modifications by anyone, 
 % private, educational or commercial.  Permission is granted for
@@ -104,20 +100,28 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date: 1998/09/21 19:54:47 $
-\RCS$Revision: 4.7 $
+\RCS$Date: 1998/09/21 20:27:06 $
+\RCS$Revision: 4.8 $
 
 \ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
 %% Initial code part:
 %
 \newlength{\box@width}
+\newlength{\box@height}
 \newlength{\half@box}
+\newlength{\window@top}
 \newlength{\FIRST@textheight}
 \newlength{\OLD@textheight}
 \newlength{\OLD@headsep}
-\newcommand*{\ourref}[1]{\def\oref{#1}}
-\newcommand*{\yourref}[1]{\def\yref{#1}}
+\newcommand*{\ourref}[1]{\def\O@ref{#1}}
+\newcommand*{\yourref}[1]{\def\Y@ref{#1}}
+\def\Letter@Date(#1/#2/#3){%
+  \ifx\@empty#1\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
+  \ifx\@empty#2\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
+  \ifx\@empty#3\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
+  \def\Date@Year{#1}\def\Date@Month{#2}\def\Date@Day{#3}\fi\fi\fi}
+\newcommand*{\LetterDate}[1]{\Letter@Date(#1)}
 \ourref{}
 \yourref{}
 \newif\ifl@bels
@@ -149,16 +153,20 @@
 %% Babel part:
 %
 \addto\extrasnynorsk{%
-  \def\captionoref{{\small V{\aa}r ref.:}}%
-  \def\captionyref{{\small Dykkar ref.:}}%
+  \def\captionO@ref{{\small V{\aa}r ref.:}}%
+  \def\captionY@ref{{\small Dykkar ref.:}}%
 }
 \addto\extrasnorsk{%
-  \def\captionoref{{\small V{\aa}r ref.:}}%
-  \def\captionyref{{\small Deres ref.:}}%
+  \def\captionO@ref{{\small V{\aa}r ref.:}}%
+  \def\captionY@ref{{\small Deres ref.:}}%
 }
 \addto\extrasenglish{%
-  \def\captionoref{{\small Our ref.:}}%
-  \def\captionyref{{\small Your ref.:}}%
+  \def\captionO@ref{{\small Our ref.:}}%
+  \def\captionY@ref{{\small Your ref.:}}%
+}
+\addto\extrasamerican{%
+  \def\captionO@ref{{\small Our ref.:}}%
+  \def\captionY@ref{{\small Your ref.:}}%
 }
 %
 %% Modification part:
@@ -193,11 +201,16 @@
                                % \telephone field without clashing
                                % with the window of the envelope.
   \setlength{\headheight}{85mm}
+  \setlength\box@height{\headheight}
+  \setlength\window@top{\box@height}
+  \divide\box@height\unitlength
+  \addtolength{\window@top}{-45mm}
+  \divide\window@top\unitlength
   \setlength{\headsep}{\OLD@headsep}
   \l@stfalse
   \def \@evenhead{%
-    \begin{picture}(\number\box@width,85)%
-      \put(0,32.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
+    \begin{picture}(\number\box@width,\number\box@height)%
+      \put(-5.4,\number\window@top){\makebox(0,0)[tl]{\begin{minipage}[c][20mm][c]{85mm}
             \toname\\
             \toaddress
           \end{minipage}}}%
@@ -209,22 +222,27 @@
             \fromaddress
           \end{minipage}}}%
       \put(\number\box@width,55){\makebox(0,0)[br]{\begin{minipage}{\half@box}
-            \raggedleft\ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
+            \raggedleft\ifx\@empty\fromlocation \else \fromlocation,\ \fi%
             % In case you don't use \location
+            {\ifx\@empty\Date@Year\else%
+              \def\year{\Date@Year}%
+              \def\month{\Date@Month}%
+              \def\day{\Date@Day}\fi%
+              \@date}
           \end{minipage}}}%
       \ifx\@empty\telephonenum\else %
       \put(\number\box@width,15){\makebox(0,0)[br]{\begin{minipage}{\half@box}
             \raggedleft\telephonenum
           \end{minipage}}}%
       \fi%
-      \ifx\@empty\yref\else %
-      \put(0,5){\makebox(0,0)[cl]{\captionyref\ \yref}}%
+      \ifx\@empty\Y@ref\else %
+      \put(0,5){\makebox(0,0)[cl]{\captionY@ref\ \Y@ref}}%
       \fi%
-      \ifx\@empty\oref\else %
-      \put(70,5){\makebox(0,0)[cl]{\captionoref\ \oref}}%
+      \ifx\@empty\O@ref\else %
+      \put(70,5){\makebox(0,0)[cl]{\captionO@ref\ \O@ref}}%
       \fi%
 %      \put(0,0){\vector(1,0){\number\box@width}}%
-%      \put(0,0){\vector(0,1){85}}%
+%      \put(0,0){\vector(0,1){\number\box@height}}%
       % These two folding lines are placed at 10.4mm from the left
       % edge of the paper, running left way off the edge. 
       \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
