@@ -1,8 +1,10 @@
-% $Id: brev.cls,v 2.4 1997/01/26 15:55:42 ambolt Exp $
+% $Id: brev.cls,v 2.5 1997/10/11 22:41:24 ambolt Exp ambolt $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
 % \documentclass[norsk,...]{brev}
+% or
+% \documentclass[nynorsk,...]{brev}
 % or
 % \documentclass[english,...]{brev}
 
@@ -22,12 +24,12 @@
 % within the window of window envelopes, and the sender address above
 % the window.
 % Two folding lines is also provided for folding the letter correctly
-% both in E5 og E65 envelopes.  These are lines placed 10.5cm and
+% both in C5 og E65 envelopes.  These lines are placed 10.5cm and
 % 14.8cm from the top edge of the paper. 
 % This class tries to look like the Norwegian standard letter, but is
 % probably wrong. 
-% The class is made and tested with A4 paper and 11pt font, but should
-% be portable to other dimensions as well. 
+% The class is made and tested with A4 paper, but should be portable
+% to other dimensions as well.  
 
 % The envelope used for defining this class is a E65 window envelope
 % with the following characteristics:
@@ -56,7 +58,7 @@
 % Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
 % With thanks to 
 %   Dag Langmyhr <dag@ifi.uio.no>
-%   Svend Tollak Munkejord <stm@stud.unit.no>
+%   Svend Tollak Munkejord <stm@stud.ntnu.no>
 %   Hans Peter Verne <hpv@kjemi.uio.no>
 %   Harald Hanche-Olsen <hanche@math.ntnu.no>
 
@@ -66,7 +68,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1997/10/12 Klasse for private brev]
+\ProvidesClass{brev}[1997/12/20 Klasse for private brev]
 
 %% Initial code part:
 
@@ -93,8 +95,12 @@
 
 %% Babel part:
 
+\addto\extrasnynorsk{%
+  \def\captionoref{{\small V{\aa}r ref.:}}%
+  \def\captionyref{{\small Dykkar ref.:}}%
+}
 \addto\extrasnorsk{%
-  \def\captionoref{{\small Vår ref.:}}%
+  \def\captionoref{{\small V{\aa}r ref.:}}%
   \def\captionyref{{\small Deres ref.:}}%
 }
 \addto\extrasenglish{%
@@ -139,10 +145,10 @@
         \ifx\@empty\oref\else %
           {\put(7,-1){\makebox(0,0)[cl]{\captionoref\ \oref}}}
         \fi
-	% These two folding lines are placed at 5.4mm from the left
+	% These two folding lines are placed at 10.4mm from the left
 	% edge of the paper, running left way off the edge. 
-        \put(-2,-3.5){\line(-1,0){1}}
-        \put(-2,-7.8){\line(-1,0){1}}
+        \put(-1.5,-3.5){\line(-1,0){2}}
+        \put(-1.5,-7.8){\line(-1,0){2}}
       \end{picture}\hss\raisebox{4cm}{%
           \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date}}}%
           % In case you don't use \location
