@@ -1,10 +1,20 @@
-% $Id%
+% $Id$
+
+% A little letter class for personal letters.  It is called ``brev''
+% because that is the Norwegian name for letter, and the name
+% ``letter'' is used. 
+
+% The class is distributed for free use and modifications by anyone,
+% private, educational or commercial.  But I would like to hear about
+% any improvements!
+
+% Written by Asgeir Nilsen <ambolt@stud.ntnu.no>.
 
 %% Identification part:
 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
 
-\ProvidesClass{brev}[1996/04/16 $Revision$ Klasse for private brev]
+\ProvidesClass{brev}[1996/04/16 $Revision: 1.0 $ Klasse for private brev]
 
 %% Initial code part:
 
