@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.10 1996/05/31 00:12:32 ambolt Exp ambolt $
+% $Id: brev.cls,v 1.11 1996/05/31 13:48:57 ambolt Exp ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
@@ -41,7 +41,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 
-\ProvidesClass{brev}[1996/05/26 $Revision: 1.10 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/06/01 $Revision: 1.11 $ Klasse for private brev]
 
 %% Initial code part:
 
