@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.0 1996/08/07 19:37:42 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.1 1996/09/13 06:12:54 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
@@ -45,7 +45,7 @@
 
 %% Identification part:
 
-\ProvidesClass{brev}[1996/09/13 $Revision: 2.0 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/10/14 $Revision: 2.1 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -63,7 +63,7 @@
 
 %% Package loading part:
 
-\LoadClass[a4paper,11pt]{letter}
+\LoadClass[a4paper]{letter}
 
 %% Modification part:
 
@@ -84,12 +84,12 @@
   \addtolength\topadjust{\baselineskip} % The height of one line of text
   \addtolength\topadjust{-7cm} % The height of the picture environment
   \def \@evenhead{\raisebox{\topadjust}[0pt][0pt]{%
-      \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(7,7)
-        \put(0,1.75){\makebox(0,0)[cl]{\begin{minipage}{7cm}
+      \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(7,8)
+        \put(0,1.75){\makebox(0,0)[cl]{\begin{minipage}{8cm}
           \toname\\
           \toaddress
           \end{minipage}}}
-        \put(0,4){\makebox(0,0)[bl]{\begin{minipage}{7cm}
+        \put(0,4){\makebox(0,0)[bl]{\begin{minipage}{8cm}
           \ifx\@empty\fromname % In case you don't use \name
           \else
              \fromname\\
