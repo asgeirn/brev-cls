@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.0 1998/05/12 20:48:42 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.1 1998/05/13 08:06:05 ambolt Exp ambolt $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -98,15 +98,15 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date$ v$Revision$ Class for private letters]
+\ProvidesClass{brev}[$Date: 1998/05/13 08:06:05 $ v$Revision: 4.1 $ Class for private letters]
+%\ProvidesClass{brev}[1990/01/01 Class for private letters]
 %
 %% Initial code part:
 %
-\newlength{\topwidth}
 \newlength{\box@width}
 \newlength{\half@box}
-\newlength{\firstpageheight}
-\newlength{\OLDtextheight}
+\newlength{\FIRST@textheight}
+\newlength{\OLD@textheight}
 \raggedright
 \newcommand*{\ourref}[1]{\def\oref{#1}}
 \newcommand*{\yourref}[1]{\def\yref{#1}}
@@ -156,15 +156,15 @@
 \addtolength{\textwidth}{\evensidemargin}
 \setlength{\evensidemargin}{0pt}
 \setlength{\longindentation}{0pt}
-\setlength{\firstpageheight}{\textheight}
-\addtolength{\firstpageheight}{-85mm}
-\addtolength{\firstpageheight}{1in}
-\addtolength{\firstpageheight}{\topmargin}
-\setlength{\OLDtextheight}{\textheight}
-\addtolength{\OLDtextheight}{\headheight}
-\addtolength{\OLDtextheight}{\headsep}
+\setlength{\FIRST@textheight}{\textheight}
+\addtolength{\FIRST@textheight}{-85mm}
+\addtolength{\FIRST@textheight}{1in}
+\addtolength{\FIRST@textheight}{\topmargin}
+\setlength{\OLD@textheight}{\textheight}
+\addtolength{\OLD@textheight}{\headheight}
+\addtolength{\OLD@textheight}{\headsep}
 \global\headheight=85mm
-\global\textheight\firstpageheight
+\global\textheight\FIRST@textheight
 %
 % Address magic
 %
@@ -186,8 +186,6 @@
 %
 \def \ps@firstpage{%
   \setlength\unitlength{1mm}%
-  \setlength\topwidth{\textwidth}%
-  \addtolength\topwidth{\oddsidemargin}%
   \setlength\topmargin{-1in}   % The 1in space given in the dvi drivers
   \setlength\box@width{\textwidth}%
   \divide\box@width\unitlength % This will be the width of the picture
@@ -196,47 +194,46 @@
   \addtolength\half@box{-8cm}  % This is the room left for the
                                % \telephone field without clashing
                                % with the window of the envelope.
-  \def \@evenhead{\hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(\number\box@width,85)%
-        \put(0,32.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
-          \toname\\
-          \expandafter\addressm@gic\toaddress\\\relax
+  \def \@evenhead{%
+    \begin{picture}(\number\box@width,85)%
+      \put(0,32.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
+            \toname\\
+            \expandafter\addressm@gic\toaddress\\\relax
           \end{minipage}}}%
-        \put(0,55){\makebox(0,0)[bl]{\begin{minipage}{\textwidth}
-          \ifx\@empty\fromname % In case you don't use \name
-          \else %
-             \fromname\\
-          \fi
-          \expandafter\addressm@gic\fromaddress\\\relax
+      \put(0,55){\makebox(0,0)[bl]{\begin{minipage}{\textwidth}
+            \ifx\@empty\fromname % In case you don't use \name
+            \else %
+            \fromname\\
+            \fi
+            \expandafter\addressm@gic\fromaddress\\\relax
           \end{minipage}}}%
-        \put(\number\box@width,55){\makebox(0,0)[br]{\begin{minipage}{\half@box}
-          \raggedleft\ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
-          % In case you don't use \location
+      \put(\number\box@width,55){\makebox(0,0)[br]{\begin{minipage}{\half@box}
+            \raggedleft\ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
+            % In case you don't use \location
           \end{minipage}}}%
-        \ifx\@empty\telephonenum\else %
-          \put(\number\box@width,15){\makebox(0,0)[br]{\begin{minipage}{\half@box}
-             \raggedleft\telephonenum
+      \ifx\@empty\telephonenum\else %
+      \put(\number\box@width,15){\makebox(0,0)[br]{\begin{minipage}{\half@box}
+            \raggedleft\telephonenum
           \end{minipage}}}%
-        \fi%
-        \ifx\@empty\yref\else %
-          {\put(0,5){\makebox(0,0)[cl]{\captionyref\ \yref}}}
-        \fi%
-        \ifx\@empty\oref\else %
-          {\put(70,5){\makebox(0,0)[cl]{\captionoref\ \oref}}}
-        \fi%
-%        \put(0,0){\vector(1,0){\number\box@width}}%
-%        \put(0,0){\vector(0,1){85}}%
-        % These two folding lines are placed at 10.4mm from the left
-        % edge of the paper, running left way off the edge. 
-        \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
-        \put(-15,-63){\makebox(0,0)[cl]{\line(-1,0){20}}}%
-      \end{picture}}%
-  }%
+      \fi%
+      \ifx\@empty\yref\else %
+      \put(0,5){\makebox(0,0)[cl]{\captionyref\ \yref}}%
+      \fi%
+      \ifx\@empty\oref\else %
+      \put(70,5){\makebox(0,0)[cl]{\captionoref\ \oref}}%
+      \fi%
+      \put(0,0){\vector(1,0){\number\box@width}}%
+      \put(0,0){\vector(0,1){85}}%
+      % These two folding lines are placed at 10.4mm from the left
+      % edge of the paper, running left way off the edge. 
+      \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
+      \put(-15,-63){\makebox(0,0)[cl]{\line(-1,0){20}}}%
+    \end{picture}}%
   \def \@oddhead{\@evenhead}%
   \def \@oddfoot{%
-    \global\textheight\OLDtextheight%
+    \global\textheight\OLD@textheight%
     \global\headheight=0pt%
-    \global\headsep=0pt%
-}%
+    \global\headsep=0pt}%
   \def \@evenfoot{}%
 }
 %
