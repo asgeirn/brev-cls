@@ -1,8 +1,13 @@
-% $Id: brev.cls,v 1.11 1996/05/31 13:48:57 ambolt Exp ambolt $
+% $Id: brev.cls,v 1.12 1996/06/01 15:59:46 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
 % ``letter'' is the standard LaTeX letter class. 
+
+% This version originally requires LaTeX 2e version 1995/12/01 or
+% later.  If you're not using this, please patch the file with
+% itself.  A patch to downgrade this class to the 1994/12/01 version
+% is at the bottom of this file.
 
 % The special characteristics of this style is the addresses field at
 % the top of the first page. This one is placed within a 7cm by 7cm
@@ -37,11 +42,13 @@
 %   Dag Langmyhr <dag@ifi.uio.no>
 %   Svend Tollak Munkejord <stm@stud.unit.no>
 
-%% Identification part:
+%% Latex requirement part:
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 
-\ProvidesClass{brev}[1996/06/01 $Revision: 1.11 $ Klasse for private brev]
+%% Identification part:
+
+\ProvidesClass{brev}[1996/06/04 $Revision: 1.12 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -108,3 +115,36 @@
   {\textbf{#1}\par\nobreak}}
 
 \pagestyle{plain}
+% The following is a patch for those not using the 1995/12/01 or later
+% version of LaTeX 2e.  It replaces the LoadClassWithOptions command
+% with older equivalents.
+% Just use `patch < brev.cls` to use this patch.
+\endinput
+--- brev.cls	Tue Jun  4 01:41:25 1996
++++ brev.old.cls	Tue Jun  4 01:41:30 1996
+@@ -44,7 +44,7 @@
+ 
+ %% Latex requirement part:
+ 
+-\NeedsTeXFormat{LaTeX2e}[1995/12/01]
++\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+ 
+ %% Identification part:
+ 
+@@ -57,11 +57,15 @@
+ 
+ %% Options declaration part:
+ 
++\DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
++
+ %% Options execution part:
+ 
++\ProcessOptions
++
+ %% Package loading part:
+ 
+-\LoadClassWithOptions{letter}
++\LoadClass[a4paper]{letter}
+ 
+ % Modify the first page layout:
+ 
