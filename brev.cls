@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 2.7 1998/01/10 20:00:57 ambolt Exp ambolt $
+% $Id: brev.cls,v 2.8 1998/01/12 20:28:54 ambolt Exp ambolt $
 
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -156,8 +156,8 @@
         \ifx\@empty\oref\else %
           {\put(7,-1){\makebox(0,0)[cl]{\captionoref\ \oref}}}
         \fi
-	% These two folding lines are placed at 10.4mm from the left
-	% edge of the paper, running left way off the edge. 
+        % These two folding lines are placed at 10.4mm from the left
+        % edge of the paper, running left way off the edge. 
         \put(-1.5,-3.5){\line(-1,0){2}}
         \put(-1.5,-7.8){\line(-1,0){2}}
       \end{picture}\hss\raisebox{4cm}{%
@@ -191,12 +191,12 @@
   \noindent
   \ifx\@empty\fromaddress\else
   \hspace*{\longindentation}\fi
-  \parbox{\indentedwidth}{\raggedright
-       \ignorespaces #1\\[6\medskipamount]%
-       \ifx\@empty\fromsig
-           \fromname
-       \else \fromsig \fi\strut}%
-   \par}
+  \raggedright
+  \ignorespaces #1\\[6\medskipamount]%
+  \ifx\@empty\fromsig
+  \fromname
+  \else \fromsig \fi\strut
+  \par}
 
 \pagestyle{plain}
 
