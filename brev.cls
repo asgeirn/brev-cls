@@ -1,5 +1,5 @@
-% $Id: brev.cls,v 3.0 1998/05/05 19:01:03 ambolt Exp ambolt $
-
+% $Id: brev.cls,v 3.1 1998/05/05 19:18:53 ambolt Exp ambolt $
+%
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
 % \documentclass[norsk,...]{brev}
@@ -7,12 +7,12 @@
 % \documentclass[nynorsk,...]{brev}
 % or
 % \documentclass[english,...]{brev}
-
+%
 % This class introduces two new commands:
 % \yourref{text}        Inserts a ``Your ref'' caption with text at an
 %                       appropriate place.
 % \ourref{text}         Does the same for ``Our ref''.
-
+%
 % This class also supports mailing labels via two class arguments and
 % one new command.
 % The label sheets supported are the ones with 7x3 labels on letter
@@ -30,11 +30,15 @@
 %                       of the labels removed, the paper might jam in
 %                       your printer.  Use with caution!
 %                       This command must be given in the preamble.
-
+% \labelsheet{dim}      Gives the dimensions of the label sheet.
+%                       Default is \labelsheet{3x8}, which gives a
+%                       sheet with 8 rows with 3 labels each (quite
+%                       standard for A4 sheets).
+%
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
 % ``letter'' is the standard LaTeX letter class. 
-
+%
 % The special characteristics of this class is the addresses field at
 % the top of the first page. This one is placed within a 7cm by 8cm
 % picture element adjusted to the paper edge at the top and 1in from
@@ -46,7 +50,7 @@
 % 14.8cm from the top edge of the paper. 
 % The class is made and tested with A4 paper, but should be portable
 % to other dimensions as well.  
-
+%
 % The envelope used for defining this class is a E65 window envelope
 % with the following characteristics:
 % +------------------------------+
@@ -58,27 +62,27 @@
 % +------------------------------+
 % Dimension A (from top edge of env. to bot. edge of win): 7cm
 % Dimension B (height of window)                         : 3cm
-
+%
 % This class is Copyright © 1998 Asgeir Nilsen.  All rights reserved.
-
+%
 % The class is distributed for free use and modifications by anyone, 
 % private, educational or commercial.  Permission is granted for
 % modifications and reuse for any purpose, as long as the author is
 % informed of this.
-
+%
 % This package has shamelessly stolen the mailing label definitions
 % from Sebastian Rahtz' labels package.  The original copyright is
 % within the redefinition of letter.cls' \startlabels at the end of
 % this file.
-
+%
 % There is a mailing list for news and updates for this class.  Send a
 % mail to majordomo@mercury.kje.ntnu.no with the text 
 % `subscribe brev-cls-list <your@email.address>' in the TEXT (NOT
 % subject) of the message.
-
+%
 % The newest version of this class is always available at
 % ftp://mercury.kje.ntnu.no/pub/latex/brev.cls. 
-
+%
 % Written by Asgeir Nilsen <ambolt@stud.ntnu.no>
 % With thanks to 
 %   Dag Langmyhr <dag@ifi.uio.no>
@@ -86,21 +90,23 @@
 %   Hans Peter Verne <hpv@kjemi.uio.no>
 %   Harald Hanche-Olsen <hanche@math.ntnu.no>
 %   Morten Simonsen <mortensi@idt.ntnu.no>
-
+%   Helge Avlesen <avle@ii.uib.no>
+%
 %% Latex requirement part:
-
+%
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
-
+%
 %% Identification part:
-
-\ProvidesClass{brev}[1998/05/05 Class for private letters]
-
+%
+\ProvidesClass{brev}[1998/05/12 Class for private letters]
+%
 %% Initial code part:
-
+%
 \newlength{\topwidth}
-\newlength{\topadjust}
 \newlength{\box@width}
 \newlength{\half@box}
+\newlength{\firstpageheight}
+\newlength{\OLDtextheight}
 \raggedright
 \newcommand*{\ourref}[1]{\def\oref{#1}}
 \newcommand*{\yourref}[1]{\def\yref{#1}}
@@ -112,24 +118,24 @@
 \l@belsfalse
 \l@@belsfalse
 \l@@@belsfalse
-
+%
 %% Options declaration part:
-
+%
 \DeclareOption{returnlabels}{\l@belstrue\l@@@belstrue}
 \DeclareOption{labels}{\l@belstrue\l@@belstrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
-
+%
 %% Options execution part:
-
+%
 \ProcessOptions
-
+%
 %% Package loading part:
-
-\LoadClass[a4paper]{letter}
+%
+\LoadClass{letter}
 \RequirePackage{babel}
-
+%
 %% Babel part:
-
+%
 \addto\extrasnynorsk{%
   \def\captionoref{{\small V{\aa}r ref.:}}%
   \def\captionyref{{\small Dykkar ref.:}}%
@@ -142,106 +148,116 @@
   \def\captionoref{{\small Our ref.:}}%
   \def\captionyref{{\small Your ref.:}}%
 }
-
+%
 %% Modification part:
-
+%
 \addtolength{\textwidth}{\oddsidemargin}
 \setlength{\oddsidemargin}{0pt}
 \addtolength{\textwidth}{\evensidemargin}
 \setlength{\evensidemargin}{0pt}
 \setlength{\longindentation}{0pt}
-
+\setlength{\firstpageheight}{\textheight}
+\addtolength{\firstpageheight}{-85mm}
+\addtolength{\firstpageheight}{1in}
+\addtolength{\firstpageheight}{\topmargin}
+\setlength{\OLDtextheight}{\textheight}
+\addtolength{\OLDtextheight}{\headheight}
+\addtolength{\OLDtextheight}{\headsep}
+\global\headheight=85mm
+\global\textheight\firstpageheight
+%
 % Address magic
-
+%
 \def\postalm@gic#1 #2\relax{%
   \ifx \relax#1\relax       % Is #1 a space?
     \postalm@gic#2\relax
   \else
     \MakeUppercase{#1}\ \ \MakeUppercase{#2}
   \fi}
-
+%
 \def\addressm@gic#1\\#2\relax{%
   \ifx\relax#2\relax          % Is #2 empty?
     \rule{0pt}{0pt}\\\postalm@gic#1\relax
   \else
     #1\\\addressm@gic#2\relax
   \fi}
-
+%
 % Modify the first page layout:
-
+%
 \def \ps@firstpage{%
-  \setlength\unitlength{1mm}
-  \setlength\topwidth{\textwidth}
-  \addtolength\topwidth{\oddsidemargin}
-  \setlength\topadjust{\topmargin}
-  \addtolength\topadjust{1in}  % The 1in space given in the dvi drivers
-  \addtolength\topadjust{\baselineskip} % The height of one line of text
-  \addtolength\topadjust{-7cm} % The height of the picture environment
-  \setlength\box@width{\textwidth}
+  \setlength\unitlength{1mm}%
+  \setlength\topwidth{\textwidth}%
+  \addtolength\topwidth{\oddsidemargin}%
+  \setlength\topmargin{-1in}   % The 1in space given in the dvi drivers
+  \setlength\box@width{\textwidth}%
   \divide\box@width\unitlength % This will be the width of the picture
                                % environment
-  \setlength\half@box{\textwidth}
+  \setlength\half@box{\textwidth}%
   \addtolength\half@box{-8cm}  % This is the room left for the
                                % \telephone field without clashing
                                % with the window of the envelope.
-  \def \@evenhead{\raisebox{\topadjust}[0pt][0pt]{%
-      \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(70,\number\box@width)
-        \put(0,17.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
+  \def \@evenhead{\hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(\number\box@width,85)%
+        \put(0,32.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
           \toname\\
           \expandafter\addressm@gic\toaddress\\\relax
-          \end{minipage}}}
-        \put(0,40){\makebox(0,0)[bl]{\begin{minipage}{\textwidth}
+          \end{minipage}}}%
+        \put(0,55){\makebox(0,0)[bl]{\begin{minipage}{\textwidth}
           \ifx\@empty\fromname % In case you don't use \name
-          \else
+          \else %
              \fromname\\
           \fi
           \expandafter\addressm@gic\fromaddress\\\relax
-          \end{minipage}}}
-        \put(\number\box@width,40){\makebox(0,0)[br]{\begin{minipage}{\half@box}
-          \raggedleft
-          \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
+          \end{minipage}}}%
+        \put(\number\box@width,55){\makebox(0,0)[br]{\begin{minipage}{\half@box}
+          \raggedleft\ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date
           % In case you don't use \location
-          \end{minipage}}}
-        \ifx\@empty\telephonenum\else
-          \put(\number\box@width,0){\makebox(0,0)[br]{\begin{minipage}{\half@box}
-             \raggedleft
-             \telephonenum
-          \end{minipage}}}
-        \fi
+          \end{minipage}}}%
+        \ifx\@empty\telephonenum\else %
+          \put(\number\box@width,15){\makebox(0,0)[br]{\begin{minipage}{\half@box}
+             \raggedleft\telephonenum
+          \end{minipage}}}%
+        \fi%
         \ifx\@empty\yref\else %
-          {\put(0,-10){\makebox(0,0)[cl]{\captionyref\ \yref}}}
-        \fi
+          {\put(0,5){\makebox(0,0)[cl]{\captionyref\ \yref}}}
+        \fi%
         \ifx\@empty\oref\else %
-          {\put(70,-10){\makebox(0,0)[cl]{\captionoref\ \oref}}}
-        \fi
+          {\put(70,5){\makebox(0,0)[cl]{\captionoref\ \oref}}}
+        \fi%
+%        \put(0,0){\vector(1,0){\number\box@width}}%
+%        \put(0,0){\vector(0,1){85}}%
         % These two folding lines are placed at 10.4mm from the left
         % edge of the paper, running left way off the edge. 
-        \put(-15,-35){\line(-1,0){20}}
-        \put(-15,-78){\line(-1,0){20}}
-      \end{picture}}}%
+        \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
+        \put(-15,-63){\makebox(0,0)[cl]{\line(-1,0){20}}}%
+      \end{picture}}%
   }%
   \def \@oddhead{\@evenhead}%
-  \def \@oddfoot{}\def \@evenfoot{}%
+  \def \@oddfoot{%
+    \global\textheight\OLDtextheight%
+    \global\headheight=0pt%
+    \global\headsep=0pt%
+}%
+  \def \@evenfoot{}%
 }
-
+%
 % Modify layout of other pages:
-
+%
 \def \ps@plain{%
-  \def \@evenhead{}\def \@oddhead{}%
+  \def \@oddhead{}%
+  \def \@evenhead{}%
   \def \@evenfoot{\normalfont\rmfamily\normalsize\mdseries\upshape\hfil
         -- \thepage\ --\hfil}%
   \def \@oddfoot{\@evenfoot}%
 }
-
+%
 % Modify \opening:
-
+%
 \renewcommand{\opening}[1]{%
   \thispagestyle{firstpage} 
-  \vspace*{0,7cm}
   {\textbf{#1}\par\nobreak}}
-
+%
 % Modify \closing:
-
+%
 \renewcommand{\closing}[1]{\par\nobreak\vspace{5\parskip}%
   \stopbreaks
   \noindent
@@ -253,11 +269,11 @@
   \fromname
   \else \fromsig \fi\strut
   \par}
-
+%
 \pagestyle{plain}
-
+%
 % Mailing labels:
-
+%
 \renewcommand*{\startlabels}{\pagestyle{empty}%
 %% 
 %% This is file `labels.sty',
@@ -281,8 +297,6 @@
 %% File: labels.dtx  Copyright (C) 1993-1994-1995 by Sebastian Rahtz
 %%   and Grant Gustafson
 %% All rights reserved.
-\newcount\LabelCols
-\newcount\LabelRows
 \newdimen\LeftBorder
 \newdimen\RightBorder
 \newdimen\TopBorder
@@ -304,11 +318,6 @@
 \first@labeltrue
 \LabelGridfalse
 \LabelInfofalse
-\ifdim\paperwidth=210mm\relax%
-   \LabelCols=3\relax\LabelRows=8\relax% a4paper
-\else
-   \LabelCols=3\relax\LabelRows=7\relax% letterpaper
-\fi%
 \LeftBorder=8mm
 \RightBorder=8mm
 \TopBorder=9mm
@@ -347,23 +356,8 @@
 \global\half@label=\label@height\divide\half@label by2\relax
 \global\label@number=1\relax
 }
-\def\LabelSetup{\@LabelSetup%
-\ifLabelInfo
-   \typeout{Control sequences adjustable in the preamble:}
-   \typeout{\LabelRows=\the\LabelRows}
-   \typeout{\LabelCols=\the\LabelCols}
-   \TypeoutBlurb{\TopBorder}{\TopBorder}
-   \TypeoutBlurb{\BottomBorder}{\BottomBorder}
-   \TypeoutBlurb{\LeftBorder}{\LeftBorder}
-   \TypeoutBlurb{\RightBorder}{\RightBorder}
-   \typeout{Computed values:}
-   \TypeoutBlurb{Label Width}{\label@width}
-   \TypeoutBlurb{Label Height}{\label@height}
-%\else
-%   \typeout{To print info, put `\protect\LabelInfotrue' in the preamble}
-\fi
-}
-\numberoflabels=1%
+\def\LabelSetup{\@LabelSetup}
+\numberoflabels=1
 \def\sticky@label{\l@so@far=0%
 \loop\ifnum\l@so@far<\numberoflabels\advance\l@so@far by 1\make@label%
 \repeat}
@@ -393,7 +387,7 @@
 \usebox{\this@label}%
 \rule{\RightBorder}{0pt}%
 }}%
-\ifnum\skip@labels<\sk@pped\message{x}\else\message{+}\fi%
+\ifnum\theskiplabels>0\message{x}\else\message{+}\fi%
 \ifnum\label@number=\LabelCols%
 \message{|}%
 \endgraf\nointerlineskip%
@@ -403,10 +397,11 @@
 \ifnum\theskiplabels>0
 \numberoflabels=\theskiplabels
 \addresslabel{\rule{0pt}{0pt}}
+\setcounter{skiplabels}{0}
 \numberoflabels=1
 \fi
 }
-
+%
 \newcount\@Milli
 \def\ToMilli#1{\@Milli=#1\advance\@Milli by93225\relax
 \divide\@Milli by 186450\relax}
@@ -426,12 +421,22 @@
 \newcount\sk@pped
 \newcounter{skiplabels}
 \def\skiplabels#1{\setcounter{skiplabels}{#1}}
-
+%
+\newcount\LabelCols
+\newcount\LabelRows
+\ifdim\paperwidth=210mm\relax%
+   \LabelCols=3\relax\LabelRows=8\relax% a4paper
+\else
+   \LabelCols=3\relax\LabelRows=7\relax% letterpaper
+\fi%
+\def\l@belsheet(#1x#2){\LabelCols=#1\LabelRows=#2}
+\newcommand{\labelsheet}[1]{\l@belsheet(#1)}
+%
 \renewcommand*{\mlabel}[2]{%
   \ifx#1\@empty\else\addresslabel{\expandafter\addressm@gic#1\\\relax}\fi
   \ifl@@bels\addresslabel{\expandafter\addressm@gic#2\\\relax}\fi}
-
+%
 \ifl@bels\makelabels\fi
 \ifl@@@bels\renewcommand*{\returnaddress}{\fromname\\\fromaddress}\fi
-
+%
 % End of brev.cls
