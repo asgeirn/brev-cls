@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.19 2003/01/22 22:53:17 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.20 2003/07/28 19:33:54 ambolt Exp ambolt $
 %
 % Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
 %
@@ -111,6 +111,7 @@
 %   Knut Anders Hatlen <kahatlen@online.no>
 %   Petter Reinholdtsen <pere@opera.com>
 %   Toni Brkic <tbrkic@yahoo.com>
+%   Dennis Jørgensen <dnj@x.dtu.dk>
 %
 %% Latex requirement part:
 %
@@ -118,7 +119,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2003/01/22 22:53:17 $ v$Revision: 4.19 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 2003/07/28 19:33:54 $ v$Revision: 4.20 $ Class for private letters]
 %
 %% Initial code part:
 %
@@ -193,6 +194,10 @@
 \addto\extrasamerican{%
   \def\captionO@ref{{\small Our ref.:}}%
   \def\captionY@ref{{\small Your ref.:}}%
+}
+\addto\extrasdanish{%
+  \def\captionO@ref{{\small Vores ref.:}}%
+  \def\captionY@ref{{\small Deres ref.:}}%
 }
 %
 %% Modification part:
