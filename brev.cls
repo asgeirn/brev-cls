@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.9 1999/05/25 16:37:37 ambolt Exp $
+% $Id: brev.cls,v 4.10 1999/05/25 16:43:30 ambolt Exp $
 %
 % This class is Copyright © 1999 Asgeir Nilsen <asgeirn@online.no>.  
 % All rights reserved.
@@ -99,6 +99,7 @@
 %   Helge Avlesen <avle@ii.uib.no>
 %   Tage Stabell-Kulø <tage@ACM.org>
 %   Anders Andersen <Anders.Andersen@itek.norut.no>
+%   Nikolai Langfeldt <janl@linpro.no>
 %
 %% Latex requirement part:
 %
@@ -107,8 +108,8 @@
 %% Identification part:
 %
 \RequirePackage{rcs}
-\RCS$Date: 1999/05/25 16:37:37 $
-\RCS$Revision: 4.9 $
+\RCS$Date: 1999/05/25 16:43:30 $
+\RCS$Revision: 4.10 $
 
 \ProvidesClass{brev}[\RCSRawDate\space v\RCSRevision\space Class for private letters]
 %
@@ -129,6 +130,7 @@
   \ifx\@empty#3\ClassWarning{brev}{Invalid date for \protect\LetterDate}\else%
   \def\Date@Year{#1}\def\Date@Month{#2}\def\Date@Day{#3}\fi\fi\fi}
 \newcommand*{\LetterDate}[1]{\Letter@Date(#1)}
+\def\Date@Year{}
 \ourref{}
 \yourref{}
 \newif\ifl@bels
@@ -234,8 +236,9 @@
             {\ifx\@empty\Date@Year\else%
               \def\year{\Date@Year}%
               \def\month{\Date@Month}%
-              \def\day{\Date@Day}\fi%
-              \@date}
+              \def\day{\Date@Day}%
+             \fi%
+             \@date}
           \end{minipage}}}%
       \ifx\@empty\telephonenum\else %
       \put(\number\box@width,15){\makebox(0,0)[br]{\begin{minipage}{\half@box}
