@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.2 1998/05/13 09:05:59 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.3 1998/05/15 11:12:32 ambolt Exp ambolt $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -101,7 +101,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 1998/05/13 09:05:59 $ v$Revision: 4.2 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 1998/05/15 11:12:32 $ v$Revision: 4.3 $ Class for private letters]
 %\ProvidesClass{brev}[1990/01/01 Class for private letters]
 %
 %% Initial code part:
@@ -110,6 +110,7 @@
 \newlength{\half@box}
 \newlength{\FIRST@textheight}
 \newlength{\OLD@textheight}
+\newlength{\OLD@headsep}
 \newcommand*{\ourref}[1]{\def\oref{#1}}
 \newcommand*{\yourref}[1]{\def\yref{#1}}
 \ourref{}
@@ -118,6 +119,7 @@
 \newif\ifl@@bels
 \newif\ifl@@@bels
 \newif\ifr@gged
+\newif\ifl@st
 \l@belsfalse
 \l@@belsfalse
 \l@@@belsfalse
@@ -168,7 +170,7 @@
 \setlength{\OLD@textheight}{\textheight}
 \addtolength{\OLD@textheight}{\headheight}
 \addtolength{\OLD@textheight}{\headsep}
-\global\headheight=85mm
+\setlength{\OLD@headsep}{\headsep}
 \global\textheight\FIRST@textheight
 \ifr@gged\raggedright\fi
 %
@@ -200,6 +202,9 @@
   \addtolength\half@box{-8cm}  % This is the room left for the
                                % \telephone field without clashing
                                % with the window of the envelope.
+  \setlength{\headheight}{85mm}
+  \setlength{\headsep}{\OLD@headsep}
+  \l@stfalse
   \def \@evenhead{%
     \begin{picture}(\number\box@width,85)%
       \put(0,32.5){\makebox(0,0)[cl]{\begin{minipage}{8cm}
@@ -228,8 +233,8 @@
       \ifx\@empty\oref\else %
       \put(70,5){\makebox(0,0)[cl]{\captionoref\ \oref}}%
       \fi%
-      \put(0,0){\vector(1,0){\number\box@width}}%
-      \put(0,0){\vector(0,1){85}}%
+%      \put(0,0){\vector(1,0){\number\box@width}}%
+%      \put(0,0){\vector(0,1){85}}%
       % These two folding lines are placed at 10.4mm from the left
       % edge of the paper, running left way off the edge. 
       \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
@@ -249,7 +254,8 @@
   \def \@oddhead{}%
   \def \@evenhead{}%
   \def \@evenfoot{\normalfont\rmfamily\normalsize\mdseries\upshape\hfil
-        -- \thepage\ --\hfil}%
+        -- \thepage\ --\hfil%
+        \ifl@st\global\textheight\FIRST@textheight\fi}%
   \def \@oddfoot{\@evenfoot}%
 }
 %
@@ -273,6 +279,7 @@
   \else \fromsig \fi\strut
   \par}
 %
+\renewcommand{\stopletter}{\l@sttrue}
 \pagestyle{plain}
 %
 % Mailing labels:
