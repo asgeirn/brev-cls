@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 4.1 1998/05/13 08:06:05 ambolt Exp ambolt $
+% $Id: brev.cls,v 4.2 1998/05/13 09:05:59 ambolt Exp ambolt $
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -8,13 +8,16 @@
 % or
 % \documentclass[english,...]{brev}
 %
+% This class left-justifies the text (with \raggedright) by default.
+% To override this, use the `blockadjust' class option.
+%
 % This class introduces two new commands:
 % \yourref{text}        Inserts a ``Your ref'' caption with text at an
 %                       appropriate place.
 % \ourref{text}         Does the same for ``Our ref''.
 %
-% This class also supports mailing labels via two class arguments and
-% one new command.
+% This class also supports mailing labels via two class options and
+% two new commands.
 % The label sheets supported are the ones with 7x3 labels on letter
 % paper, and 8x3 labels on A4 paper.
 % 
@@ -98,7 +101,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 1998/05/13 08:06:05 $ v$Revision: 4.1 $ Class for private letters]
+\ProvidesClass{brev}[$Date: 1998/05/13 09:05:59 $ v$Revision: 4.2 $ Class for private letters]
 %\ProvidesClass{brev}[1990/01/01 Class for private letters]
 %
 %% Initial code part:
@@ -107,7 +110,6 @@
 \newlength{\half@box}
 \newlength{\FIRST@textheight}
 \newlength{\OLD@textheight}
-\raggedright
 \newcommand*{\ourref}[1]{\def\oref{#1}}
 \newcommand*{\yourref}[1]{\def\yref{#1}}
 \ourref{}
@@ -115,14 +117,17 @@
 \newif\ifl@bels
 \newif\ifl@@bels
 \newif\ifl@@@bels
+\newif\ifr@gged
 \l@belsfalse
 \l@@belsfalse
 \l@@@belsfalse
+\r@ggedtrue
 %
 %% Options declaration part:
 %
 \DeclareOption{returnlabels}{\l@belstrue\l@@@belstrue}
 \DeclareOption{labels}{\l@belstrue\l@@belstrue}
+\DeclareOption{blockadjust}{\r@ggedfalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{letter}}
 %
 %% Options execution part:
@@ -165,6 +170,7 @@
 \addtolength{\OLD@textheight}{\headsep}
 \global\headheight=85mm
 \global\textheight\FIRST@textheight
+\ifr@gged\raggedright\fi
 %
 % Address magic
 %
