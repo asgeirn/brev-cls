@@ -1,4 +1,4 @@
-% $Id: brev.cls,v 1.8 1996/05/26 12:57:23 ambolt Exp ambolt $
+% $Id: brev.cls,v 1.9 1996/05/28 16:51:28 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and the class
@@ -41,7 +41,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 
-\ProvidesClass{brev}[1996/05/26 $Revision: 1.8 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/05/26 $Revision: 1.9 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -68,7 +68,7 @@
   \addtolength\topadjust{-7cm} % The height of the picture environment
   \def \@evenhead{\raisebox{\topadjust}[0pt][0pt]{%
       \hspace*{-\oddsidemargin}\hbox to \topwidth{\begin{picture}(7,7)
-        \put(0,1.5){\makebox(0,0)[cl]{\begin{minipage}{7cm}
+        \put(0,1.75){\makebox(0,0)[cl]{\begin{minipage}{7cm}
           \toname\\
           \toaddress
           \end{minipage}}}
