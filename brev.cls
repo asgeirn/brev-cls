@@ -1,8 +1,8 @@
-% $Id: brev.cls,v 1.5 1996/04/30 21:30:50 ambolt Rel ambolt $
+% $Id: brev.cls,v 1.6 1996/04/30 22:02:34 ambolt Rel ambolt $
 
 % A little letter class for personal letters.  It is called ``brev''
-% because that is the Norwegian name for letter, and the name
-% ``letter'' is used. 
+% because that is the Norwegian name for letter, and the class
+% ``letter'' is the standard LaTeX letter class. 
 
 % The special characteristics of this style is the addresses field at
 % the top of the first page. This one is placed within a 7cm by 7cm
@@ -10,10 +10,13 @@
 % the paper edge at the left.  The recipient address should be placed
 % within the window of window envelopes, and the sender address above
 % the window.
+% Two folding lines is also provided for folding the letter correctly
+% both in E5 og E65 envelopes.  These are 4mm lines placed 10.5cm and
+% 14.8cm from the top edge of the paper.
 % The class is made and tested with A4 paper and 10pt font, but should
-% be portable to other dimensions as well.
+% be portable to other dimensions as well. 
 
-% The envelope used for defining this class is a C5/6 window envelope
+% The envelope used for defining this class is a E65 window envelope
 % with the following characteristics:
 % +------------------------------+
 % |                   |          |
@@ -38,7 +41,7 @@
 
 \NeedsTeXFormat{LaTeX2e}[1994/12/01]
 
-\ProvidesClass{brev}[1996/04/16 $Revision: 1.5 $ Klasse for private brev]
+\ProvidesClass{brev}[1996/04/16 $Revision: 1.6 $ Klasse for private brev]
 
 %% Initial code part:
 
@@ -80,6 +83,10 @@
           \fi
           \fromaddress
           \end{minipage}}}
+        % The following folding lines should be placed 0.4mm from the
+	% left edge of the paper.  Hope your printer can handle that!
+        \put(-2.5,-3.5){\line(1,0){0.4}}
+        \put(-2.5,-7.8){\line(1,0){0.4}}
       \end{picture}\hss\raisebox{1cm}{%
           \ifx\@empty\fromlocation \else \fromlocation,\ \fi \@date}}}%
           % In case you don't use \location
