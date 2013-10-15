@@ -1,6 +1,6 @@
-% $Id: brev.cls,v 4.22 2003/11/18 17:07:55 ambolt Exp ambolt $
+% brev.cls,v 4.22 2003/11/18 17:07:55 ambolt Exp
 %
-% Copyright © 1999-2003 Asgeir Nilsen <brevcls@asgeirnilsen.com>.  
+% Copyright © 1999-2003 Asgeir Nilsen <asgeir@twingine.no>.  
 %
 %    This program is free software; you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@
 % \yourref{text}          Inserts a ``Your ref'' caption with text at an
 %                         appropriate place.
 % \ourref{text}           Does the same for ``Our ref''.
-% \LetterDate{yyyy-mm-dd} This command makes it easier to date a
+% \LetterDate{yyyy/mm/dd} This command makes it easier to date a
 %                         letter at a fixed date in a babel-compatible
 %                         way.  If this command is used (and \date is
 %                         not), the class will insert the given date
@@ -94,9 +94,9 @@
 % tall. 
 %
 % The newest version of this class is always available at
-% http://www.asgeirnilsen.com/latex/
+% https://github.com/asgeirn/brev-cls
 %
-% Written by Asgeir Nilsen <brevcls@asgeirnilsen.com>
+% Written by Asgeir Nilsen <asgeir@twingine.no>
 % With thanks to 
 %   Sebastian Rahtz and Grant Gustafson
 %   Dag Langmyhr <dag@ifi.uio.no>
@@ -120,7 +120,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[$Date: 2003/11/18 17:07:55 $ v$Revision: 4.22 $ Class for private letters]
+\ProvidesClass{brev}[2003/11/18 17:07:55 v4.22 Class for private letters]
 %
 %% Initial code part:
 %

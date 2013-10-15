@@ -1,0 +1,56 @@
+README file for the package brev.cls.
+
+brev.cls is a modified letter.cls which formats letters for use with
+the window envelopes used for A4 format letters.  Folding lines for
+fitting the letter in E65 or C5 envelopes are supplied.  It also has
+options to create mailing labels, using 3x7 (letterpaper) or 3x8 (A4)
+label sheets.
+
+The class supports (and requires!) babel for the caption texts of
+``Your ref.'' and ``Our ref.''.  Currently, english, norsk and nynorsk
+are supplied.  Any contributions from other languages are welcome.
+
+This directory contains three files:
+
+brev.cls        The letter class itself
+demo.tex        A TeX file demonstrating the different commands
+                available for a letter, and where the different
+                elements are placed.
+demo.dvi        A DVI file showing it, as it appears on the author's
+                system.
+
+The class is basically used just like the standard letter.cls, but
+have some extra features:
+
+All of the elements in the header of the first page are placed within
+separate minipage environments within a picture environment.  Because
+of this, there is a large degree of freedom on what is really put
+inside the various elements.  As an example, the \date{} and
+\telephone{} commands could include small postscript files for company
+logos, pictures of the sender and such.
+
+The class adds two new commands for adding ``Our ref.'' and ``Your
+ref.'' to letters.
+
+This package has shamelessly stolen the mailing label definitions from
+Sebastian Rahtz' labels package.  The original copyright is within the
+redefinition of letter.cls' \startlabels at the end of this file.
+Mr. Rahtz has not supplied an email address in his class file, and I
+have therefore not asked for permission to do so.  If anybody could
+direct me to his address, the help would very much be appreciated.
+
+The author of this class can be contacted at asgeir@nilsen.as
+
+The latest version of this class is available from
+ftp://mercury.chembio.ntnu.no/pub/latex/
+
+There is also a mailing list for this class for announcements and
+discussions.  Contact brev-cls-list-request@mercury.chembio.ntnu.no and
+write `subscribe' in the text of the message (sans quotes).
+
+This class is Copyright © 1998-9 Asgeir Nilsen.  All rights reserved.
+
+The class is distributed for free use and modifications by anyone,
+private, educational or commercial.  Permission is granted for
+modifications and reuse for any purpose, as long as the author is
+informed of this.

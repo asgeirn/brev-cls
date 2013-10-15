@@ -1,0 +1,27 @@
+\documentclass[a4paper,norsk]{brev}
+
+\begin{document}
+\name{Arne Avsender}
+\address{Veien 133\\\ \\9999\ \ LANGTVEKKISTAN}
+\location{Hjemme}
+
+% Denne daterer brevet til 16. oktober 2002, og formaterer dato til
+% gjeldende språk (norsk)
+% Hvis du fjerner denne, får brevet dagens dato.
+% Alternativt kan du bruke \date{ } og skrive inn datoen akkurat som
+% den blir vist.
+\LetterDate{2002-10-16}
+
+\begin{letter}{Mottaker\\
+               Veien 1\\
+               \ \\
+               N-0000\ \ BY}
+  
+\opening{Hei!}
+
+Dette er et lite eksempelbrev.
+
+\closing{Med vennlig hilsen}
+
+\end{letter}
+\end{document}
