@@ -7,17 +7,25 @@ options to create mailing labels, using 3x7 (letterpaper) or 3x8 (A4)
 label sheets.
 
 The class supports (and requires!) babel for the caption texts of
-``Your ref.'' and ``Our ref.''.  Currently, english, norsk and nynorsk
-are supplied.  Any contributions from other languages are welcome.
+``Your ref.'' and ``Our ref.''.  Currently, english, norsk, nynorsk,
+danish and swedish are supplied.  Any contributions from other
+languages are welcome.
 
-This directory contains three files:
+This directory contains these files:
 
-brev.cls        The letter class itself
-demo.tex        A TeX file demonstrating the different commands
-                available for a letter, and where the different
-                elements are placed.
-demo.dvi        A DVI file showing it, as it appears on the author's
-                system.
+brev.cls
+        The letter class itself
+demo.dvi        
+        A DVI file showing where the different commands place text
+        with this class.
+eksempel.tex
+        A small example letter to get you started.
+brev.el
+        An AucTeX style file for creating letters with addresses from
+        BBDB.
+giro.cls
+        A *very* alpha class for printing out Norwegian F60 "giro"
+        invoices.  For special interests only.
 
 The class is basically used just like the standard letter.cls, but
 have some extra features:
@@ -39,18 +47,23 @@ Mr. Rahtz has not supplied an email address in his class file, and I
 have therefore not asked for permission to do so.  If anybody could
 direct me to his address, the help would very much be appreciated.
 
-The author of this class can be contacted at asgeir@nilsen.as
+The author of this class can be contacted at asgeir@twingine.no
 
 The latest version of this class is available from
-ftp://mercury.chembio.ntnu.no/pub/latex/
+https://github.com/asgeirn/brev-cls
 
-There is also a mailing list for this class for announcements and
-discussions.  Contact brev-cls-list-request@mercury.chembio.ntnu.no and
-write `subscribe' in the text of the message (sans quotes).
+This class is Copyright © 1998-2013 Asgeir Nilsen.
 
-This class is Copyright © 1998-9 Asgeir Nilsen.  All rights reserved.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-The class is distributed for free use and modifications by anyone,
-private, educational or commercial.  Permission is granted for
-modifications and reuse for any purpose, as long as the author is
-informed of this.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
