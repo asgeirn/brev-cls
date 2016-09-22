@@ -1,4 +1,4 @@
-LATEX = latex
+LATEX = latex --output-comment=""
 
 # Nothing to be done for target 'all'.
 all: demo.dvi eksempel.dvi
