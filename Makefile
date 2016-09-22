@@ -1,3 +1,5 @@
+LATEX = latex
+
 # Nothing to be done for target 'all'.
 all: demo.dvi eksempel.dvi
 
@@ -10,13 +12,13 @@ clean:
 tests: eksempel.dvi
 
 eksempel.dvi: eksempel.tex brev.cls
-	latex eksempel
+	$(LATEX) eksempel
 
 demo.dvi: demo.tex brev.cls
-	latex demo
+	$(LATEX) demo
 
 giro.dvi: giro.tex giro.cls
-	latex giro
+	$(LATEX) giro
 
 debs:
 	fakeroot debian/rules binary
