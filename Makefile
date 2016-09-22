@@ -6,7 +6,7 @@ clean:
 	$(RM) -f demo.log demo.aux demo.dvi
 	$(RM) -f .#* debian/.#*
 
-tests: ekempel.dvi
+tests: eksempel.dvi
 
 eksempel.dvi: eksempel.tex brev.cls
 	latex eksempel
