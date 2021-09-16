@@ -5,8 +5,7 @@ all: demo.dvi eksempel.dvi
 
 clean:
 	$(RM) -f eksempel.log eksempel.aux eksempel.dvi
-	$(RM) -f demo.log demo.aux demo.dvi
-	$(RM) -f giro.log giro.aux
+	$(RM) -f demo.log demo.aux demo.dvi giro.aux giro.log
 	$(RM) -f .#* debian/.#*
 
 tests: eksempel.dvi
