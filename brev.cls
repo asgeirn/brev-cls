@@ -1,6 +1,6 @@
-% brev.cls,v 4.22 2003/11/18 17:07:55 ambolt Exp
+% brev.cls,v 4.23 2016/09/23
 %
-% Copyright © 1999-2003 Asgeir Nilsen <asgeir@twingine.no>.  
+% Copyright Â© 1999-2016 Asgeir Nilsen <asgeir@twingine.no>.  
 %
 %    This program is free software; you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -105,13 +105,13 @@
 %   Harald Hanche-Olsen <hanche@math.ntnu.no>
 %   Morten Simonsen <mortensi@idt.ntnu.no>
 %   Helge Avlesen <avle@ii.uib.no>
-%   Tage Stabell-Kulø <tage@ACM.org>
+%   Tage Stabell-KulÃ¸ <tage@ACM.org>
 %   Anders Andersen <aa@computer.org>
 %   Nikolai Langfeldt <janl@linpro.no>
 %   Knut Anders Hatlen <kahatlen@online.no>
 %   Petter Reinholdtsen <pere@opera.com>
 %   Toni Brkic <tbrkic@yahoo.com>
-%   Dennis Jørgensen <dnj@x.dtu.dk>
+%   Dennis JÃ¸rgensen <dnj@x.dtu.dk>
 %   Hans Fredrik Nordhaug <hansfn@mi.uib.no>
 %
 %% Latex requirement part:
@@ -120,7 +120,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[2003/11/18 17:07:55 v4.22 Class for private letters]
+\ProvidesClass{brev}[2016/09/23 v4.23 Class for private letters]
 %
 %% Initial code part:
 %
