@@ -1,6 +1,6 @@
-% brev.cls,v 4.23 2016/09/23
+% brev.cls,v 4.24 2021/09/16
 %
-% Copyright © 1999-2016 Asgeir Nilsen <asgeir@twingine.no>.  
+% Copyright © 1999-2021 Asgeir Nilsen <asgeir@twingine.no>.  
 %
 %    This program is free software; you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -120,7 +120,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[2016/09/23 v4.23 Class for private letters]
+\ProvidesClass{brev}[2021/09/16 v4.24 Class for private letters]
 %
 %% Initial code part:
 %
