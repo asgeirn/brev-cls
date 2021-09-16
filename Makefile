@@ -3,10 +3,10 @@ all: demo.dvi eksempel.dvi
 
 clean:
 	$(RM) -f eksempel.log eksempel.aux eksempel.dvi
-	$(RM) -f demo.log demo.aux demo.dvi
+	$(RM) -f demo.log demo.aux demo.dvi giro.aux giro.log
 	$(RM) -f .#* debian/.#*
 
-tests: ekempel.dvi
+tests: eksempel.dvi
 
 eksempel.dvi: eksempel.tex brev.cls
 	latex eksempel
