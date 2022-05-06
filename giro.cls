@@ -49,7 +49,6 @@
 \LoadClassWithOptions{letter}
 %\RequirePackage[latin1]{inputenc}
 %\RequirePackage[T1]{fontenc}
-\RequirePackage{ocr}
 %%%
 \pagestyle{empty}
 \newsavebox{\lettercontents}
