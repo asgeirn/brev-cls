@@ -49,7 +49,6 @@
 \LoadClassWithOptions{letter}
 %\RequirePackage[latin1]{inputenc}
 %\RequirePackage[T1]{fontenc}
-\RequirePackage{ocr}
 %%%
 \pagestyle{empty}
 \newsavebox{\lettercontents}
@@ -152,15 +151,15 @@
   \put(11,113){\line(1,0){\number\Rule@width}}
   \put(11,110){}
 % Girodel:
-  \put(15,105){\makebox(0,0)[bl]{\textocrb{\fromaccount}}}
-  \put(113,105){\makebox(0,0)[br]{\textocrb{\TheAmount}}}
-  \put(0,21.5){\makebox(0,0)[bl]{\textocrb{H}}}
-  \put(131,21.5){\makebox(0,0)[bl]{\textocrb{\fromaccount}}}
-  \put(70,21.5){\makebox(0,0)[br]{\textocrb{\TheKID}}}
-  \put(182,96){\makebox(0,0){\textocrb{\Forfall}}}
-  \put(102,21.5){\makebox(0,0)[br]{\textocrb{\AmountIP}}}
-  \put(106,21.5){\makebox(0,0)[bl]{\textocrb{\AmountFP}}}
-  \put(119,21.5){\makebox(0,0)[b]{\textocrb{\AmountCS}}}
+  \put(15,105){\makebox(0,0)[bl]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \fromaccount}}
+  \put(113,105){\makebox(0,0)[br]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \TheAmount}}
+  \put(0,21.5){\makebox(0,0)[bl]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont H}}
+  \put(131,21.5){\makebox(0,0)[bl]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \fromaccount}}
+  \put(70,21.5){\makebox(0,0)[br]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \TheKID}}
+  \put(182,96){\makebox(0,0){\fontencoding{OT1}\fontfamily{ocrb}\selectfont \Forfall}}
+  \put(102,21.5){\makebox(0,0)[br]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \AmountIP}}
+  \put(106,21.5){\makebox(0,0)[bl]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \AmountFP}}
+  \put(119,21.5){\makebox(0,0)[b]{\fontencoding{OT1}\fontfamily{ocrb}\selectfont \AmountCS}}
   \put(15,65){\makebox(0,0)[tl]{\begin{minipage}[t][22mm][c]{80mm}
         \texttt{\Mottaker}
       \end{minipage}}}
