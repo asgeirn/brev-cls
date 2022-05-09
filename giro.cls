@@ -19,7 +19,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{giro}[2001/10/29 19:26:05 v1.6 Klasse for utfylling av giro]
+\ProvidesClass{giro}[2022/05/09 v1.7 Klasse for utfylling av giro]
 %
 %% Initial code part:
 %
