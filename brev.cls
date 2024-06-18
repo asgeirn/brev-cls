@@ -1,6 +1,6 @@
-% brev.cls,v 4.24 2021/09/16
+% brev.cls,v 5.00 2024/06/18
 %
-% Copyright © 1999-2021 Asgeir Nilsen <asgeir@twingine.no>.  
+% Copyright © 1999-2024 Asgeir Nilsen <asgeir@twingine.no>.
 %
 %    This program is free software; you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 %
 % A little letter class for personal letters.  It is called ``brev''
 % because that is the Norwegian name for letter, and for avoiding name
-% clashes with the standard LaTeX letter class. 
+% clashes with the standard LaTeX letter class.
 %
 % Note: This class loads the babel package.
 % Specify the language in the \documentclass command:
@@ -35,7 +35,7 @@
 % or
 % \documentclass[american,...]{brev}
 %
-% Feel free to add more languages as necessary (and please do inform me) 
+% Feel free to add more languages as necessary (and please do inform me)
 %
 % This class left-justifies the text (with \raggedright) by default.
 % To override this, use the `blockadjust' class option.
@@ -53,13 +53,13 @@
 %                         way.  If this command is used (and \date is
 %                         not), the class will insert the given date
 %                         in the default form for the selected
-%                         language. 
+%                         language.
 %
 % This class also supports mailing labels via two class options and
 % two new commands.
 % The label sheets supported are the ones with 7x3 labels on letter
 % paper, and 8x3 labels on A4 paper.
-% 
+%
 % labels                Creates mailing labels for the recipient of
 %                       each letter environment.  To create extra
 %                       labels, insert empty letter environments.
@@ -85,19 +85,19 @@
 % the window.
 % Two folding lines is also provided for folding the letter correctly
 % both in C5 og E65 envelopes.  These lines are placed 10.5cm and
-% 14.8cm from the top edge of the paper. 
+% 14.8cm from the top edge of the paper.
 % The class is made and tested with A4 paper, but should be portable
-% to other dimensions as well.  
+% to other dimensions as well.
 %
 % This class assumes that the window is placed 40mm from the top edge
 % of the envelope, 15mm from the left edge and is 95mm wide and 30mm
-% tall. 
+% tall.
 %
 % The newest version of this class is always available at
 % https://github.com/asgeirn/brev-cls
 %
 % Written by Asgeir Nilsen <asgeir@twingine.no>
-% With thanks to 
+% With thanks to
 %   Sebastian Rahtz and Grant Gustafson
 %   Dag Langmyhr <dag@ifi.uio.no>
 %   Svend Tollak Munkejord <stm@stud.ntnu.no>
@@ -120,7 +120,7 @@
 %
 %% Identification part:
 %
-\ProvidesClass{brev}[2021/09/16 v4.24 Class for private letters]
+\ProvidesClass{brev}[2024/06/18 v5.00 Class for private letters]
 %
 %% Initial code part:
 %
@@ -281,7 +281,7 @@
 %     \put(0,0){\vector(1,0){\number\box@width}}%
 %     \put(0,0){\vector(0,1){\number\box@height}}%
       % These two folding lines are placed at 10.4mm from the left
-      % edge of the paper, running left way off the edge. 
+      % edge of the paper, running left way off the edge.
       \ifx\@empty\O@nofoldinglines
       \put(-15,-20){\makebox(0,0)[cl]{\line(-1,0){20}}}%
       \put(-15,-63){\makebox(0,0)[cl]{\line(-1,0){20}}}%
@@ -307,7 +307,7 @@
 % Modify \opening:
 %
 \renewcommand{\opening}[1]{%
-  \thispagestyle{firstpage} 
+  \thispagestyle{firstpage}
   \global\textheight\OLD@textheight%
   {#1\par\nobreak}}
 %
@@ -331,21 +331,21 @@
 % Mailing labels:
 %
 \renewcommand*{\startlabels}{\pagestyle{empty}%
-%% 
+%%
 %% This is file `labels.sty',
 %% generated with the docstrip utility.
-%% 
+%%
 %% The original source files were:
-%% 
+%%
 %% labels.dtx  (with options: `package')
-%% Copyright (C) 1993-1994-1995 by Sebastian Rahtz 
-%% All rights reserved. 
-%% 
-%% Permission is granted to to customize the declarations in this file to 
-%% serve the needs of your installation. However, no permission is 
-%% granted to distribute a modified version of this file under its 
-%% original name. 
-%% 
+%% Copyright (C) 1993-1994-1995 by Sebastian Rahtz
+%% All rights reserved.
+%%
+%% Permission is granted to to customize the declarations in this file to
+%% serve the needs of your installation. However, no permission is
+%% granted to distribute a modified version of this file under its
+%% original name.
+%%
 \def\LabelsFileInfo{1995/06/22\space10}
 %% File: labels.dtx  Copyright (C) 1993-1994-1995 by Sebastian Rahtz
 %%   and Grant Gustafson
